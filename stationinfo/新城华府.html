@@ -5,16 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新城华府 - 温州县域公交</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-    <link rel="manifest" href="../site.webmanifest">
-    <link rel="stylesheet" href="./station.css">
+    <script src="../base.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="stylesheet" href="./busintro.css">
+    <link rel="stylesheet" href="./indexstyle.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <h1 class="page-title">新城华府</h1>
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+            <a href="./index.html" class="nav-link">首页</a>
+            <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+            <a href="./about.html" class="nav-link">关于我们</a>
+            <a href="./tips.html" class="nav-link">乘车指南</a>
+        </nav>
+    </header>
+    <h1>新城华府</h1>
 
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
     <!-- 基础信息 + 地理位置 并排卡片 -->
     <div class="top-row">
         <div class="card">
@@ -30,7 +47,7 @@
                 </tr>
             </table>
             <figure>
-                <a href="./新城华府.png"><img src="./新城华府.png" alt="新城华府" width="100%"></a>
+                <a href="./stationinfo/新城华府.png"><img src="./stationinfo/新城华府.png" alt="新城华府" width="100%"></a>
             </figure>
         </div>
 
@@ -77,7 +94,7 @@
                         <tr>
                             <td><b>龙港公交B11路</b></td>
                             <td></td>
-                        </tr>                        
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -100,32 +117,35 @@
         </div>
     </div>
 
-    <!-- 站点周边 -->
-    <div class="card">
-        <h2>站点周边配套</h2>
-        <ul class="history">
-            <li><b>交通枢纽</b>：公交站</li>
-            <li><b>生活服务</b>：银行网点、药店、便利店、早餐店</li>
-            <li><b>公共设施</b>：休息座椅</li>
-            <li><b>住宅区域</b>：周边居民区，出行人流量较小</li>
-        </ul>
+    <div class="top-row">
+        <div class="card">
+            <h2>站点周边配套</h2>
+            <ul class="history">
+                <li><b>交通枢纽</b>：公交站</li>
+                <li><b>生活服务</b>：银行网点、药店、便利店、早餐店</li>
+                <li><b>公共设施</b>：休息座椅</li>
+                <li><b>住宅区域</b>：周边居民区，出行人流量较小</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>换乘建议</h2>
+            <ul class="history">
+                <li><a href="./stationinfo/老台.html"><b>老台</b>：距此900米</a></li>
+            </ul>
+        </div>
     </div>
 
-    <div class="card">
-        <h2>换乘建议</h2>
-        <ul class="history">
-            <li><a href="老台.html"><b>老台</b>：距此900米</a></li>
-        </ul>
-    </div>
-
-    <div class="footer">
+    <footer>
         <p>温州县域公交信息平台 © 2026 版权所有</p>
         <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
         <p>数据更新时间：2026年6月</p>
-    </div>
+    </footer>
 
-    <script src="../businfo.js"></script>
-    <script src="./search.js"></script>
+    <script src="./businfo.js"></script>
+    <script src="./stationinfo/search.js"></script>
+    <script src="./searchinfo.js"></script>
+    <script src="./stationinfo.js"></script>
 </body>
 
 </html>
