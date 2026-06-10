@@ -5,18 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>龙港公交8路</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="indexstyle.css">
     <link rel="stylesheet" href="./busintro.css">
 </head>
 
 <body>
-
-    <h1 class="page-title">龙港公交8路</h1>
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+            <a href="index.html" class="nav-link">首页</a>
+            <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+            <a href="about.html" class="nav-link">关于我们</a>
+            <a href="tips.html" class="nav-link">乘车指南</a>
+        </nav>
+    </header>
+    <h1>龙港公交8路</h1>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
     <div class="card">
         <h2>简介</h2>
         <p>本文介绍的是于2026年开通的连接城市公园和体育中心的第二代8路。</p>
-        <p>关于2023年停运的、连接新兰社区和月湖公园的第一代8路，请见「<a href="https://wiki.wzbus.net/wiki/龙港公交8路 (第一代)">龙港公交8路 (第一代)</a>」。
+        <p>关于2023年停运的、连接新兰社区和月湖公园的第一代8路，请见 <b><a href="https://wiki.wzbus.net/wiki/龙港公交8路 (第一代)">「龙港公交8路 (第一代)」</a></b>。
         </p>
-        <p>龙港公交<b>8路</b>是第十五届中国国际园林博览会龙港分会场园博公交接驳专线，往返于城市公园及体育中心。</p>
+        <p><b>龙港公交8路</b>是第十五届中国国际园林博览会龙港分会场园博公交接驳专线，往返于城市公园及体育中心。</p>
     </div>
     <div class="top-row">
         <div class="card">
@@ -291,12 +310,14 @@
             </figcaption>
         </figure>
     </div>
-
-    <div class="footer">
+    <footer>
         <p>温州县域公交信息平台 © 2026 版权所有</p>
         <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
-        <p>数据更新时间：2026年5月</p>
-    </div>
+        <p>数据更新时间：2026年6月</p>
+    </footer>
+    <script src="./stationinfo.js"></script>
+    <script src="./searchinfo.js"></script>
+    <script src="./businfo.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="./indexstyle.css">
+    <link rel="stylesheet" href="./busintro.css">
+    <title>高考期间公交服务公告</title>
+    <style>
+        li p::before {
+            content: '·';
+            font-weight: 800;
+            margin: 0 12px;
+        }
+
+        li p.white::before {
+            color: white;
+        }
+
+        h4 {
+            text-indent: 1em;
+            margin-bottom: 0.85em;
+        }
+
+        figure {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f8f9fc;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        figure a {
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        figure img {
+            max-width: 85%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 6px;
+            border: 1px solid #e4edf5;
+            margin: 0 auto;
+            display: block;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        figcaption {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
+        }
+
+        .double {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3%;
+        }
+
+        @media (max-width:600px) {
+            .double {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        .station-table tbody tr:hover {
+            background-color: white;
+        }
+
+        .station-table tbody tr td:hover {
+            background-color: #f8f9fc;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+            <a href="index.html" class="nav-link">首页</a>
+            <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+            <a href="about.html" class="nav-link">关于我们</a>
+            <a href="tips.html" class="nav-link">乘车指南</a>
+        </nav>
+    </header>
+
+    <h1>高考期间公交服务公告</h1>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
+
+    <script src="./businfo.js"></script>
+    <script src="./stationinfo.js"></script>
+    <script src="./searchinfo.js"></script>
+
+    <main>
+        <h2>苍南公交</h2>
+        <ul>
+            <li>
+                <h3>105路、115路线路走向6月7日至10日期间临时调整</h3>
+                <p>105路走向：汽车西站-建兴路-城中路-玉苍路-体育场路-<b>惠达路</b>-渎浦路-玉苍路-兴园路-成功路-苍南书城</p>
+                <p>115路走向：汽车西站-建兴路-城中路-玉苍路-<b>龙渡路</b>-灵炎线-流石</p>
+                <p>待高考结束灵溪镇交通管制解除后恢复原线路运行，望广大乘客们相互告知，给您带来的不便之处敬请谅解！</p>
+            </li>
+            <li>
+                <h3>乘车优惠</h3>
+                <p>高考期间，苍南公交开展考生免费乘车活动，同时全线执行车辆静音政策，为广大考生营造安静的出行、备考环境。</p>
+                <p>乘车规则：考生持本人准考证，即可免费乘坐县域内常规公交线路。</p>
+            </li>
+
+            <li>
+                <h4>各考点途经公交线路参考：</h4>
+                <table class="station-table">
+                    <thead>
+                        <tr>
+                            <th>考点名称</th>
+                            <th>途经公交线路</th>
+                            <th>临近公交线路</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="3">浙江省苍南中学</td>
+                            <td>K001路</td>
+                            <td rowspan="3">112路</td>
+                        </tr>
+                        <tr>
+                            <td>106路</td>
+                        </tr>
+                        <tr>
+                            <td>111路</td>
+                        </tr>
+                        <tr>
+                            <td>苍南县灵溪中学(三禾高中)</td>
+                            <td>115路</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">苍南县灵溪二高</td>
+                            <td>113路</td>
+                            <td rowspan="2">107路</td>
+                        </tr>
+                        <tr>
+                            <td>118路</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">苍南县求知中学</td>
+                            <td rowspan="2">119路</td>
+                            <td>111路</td>
+                        </tr>
+                        <tr>
+                            <td>201路</td>
+                        </tr>
+                        <tr>
+                            <td>苍南县民族中学</td>
+                            <td>105路</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="5">苍南县灵溪一中</td>
+                            <td rowspan="5">101路</td>
+                            <td>105路</td>
+                        </tr>
+                        <tr>
+                            <td>111路</td>
+                        </tr>
+                        <tr>
+                            <td>115路</td>
+                        </tr>
+                        <tr>
+                            <td>116路</td>
+                        </tr>
+                        <tr>
+                            <td>119路</td>
+                        </tr>
+                        <tr>
+                            <td>苍南县职业中专</td>
+                            <td>102路</td>
+                            <td>107路</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>温州县域公交信息平台 © 2026 版权所有</p>
+        <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
+        <p>数据更新时间：2026年6月</p>
+    </footer>
+    <script>
+        function bindRowClick() {
+            document.querySelectorAll('.station-table tbody tr').forEach(tr => {
+                const tds = tr.querySelectorAll('td');
+                tr.style.cursor = 'default';
+                [0, 1, 2].forEach(idx => {
+                    const td = tds[idx];
+                    if (!td) return;
+                    const text = td.textContent.trim();
+                    if (!text || text === '—') return;
+                    if (!text.includes('路')) {
+                        td.onclick = function () {
+                            window.location.href = 'https://map.baidu.com/search/' + text
+                            + '/@13405909.109071614,3169381.45400175,14.00z?querytype=s&da_src=shareurl&wd='
+                            + text +'&c=178&src=0&pn=0&sug=0&l=15&b=(13401674.084943987,3165316.444650606;13412671.842717119,3170579.714347405)&from=webmap&biz_forward=%7B"scaler":2,"styles":"pl"%7D&device_ratio=2'
+                        }
+                        return;
+                    }
+                    const route = busRoutes.find(item => item.name.includes(text));
+                    td.style.cursor = 'pointer';
+                    td.onclick = function () {
+                        if (route && route.url && !route.url.includes('404.html')) {
+                            window.location.href = route.url + '#路线';
+                        } else {
+                            window.location.href = './404.html';
+                        }
+                    };
+                });
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            bindRowClick();
+        });
+    </script>
+</body>
+
+</html>

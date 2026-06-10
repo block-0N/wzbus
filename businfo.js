@@ -54,10 +54,10 @@ const busRoutes = [
         "alias": ["龙港8路", "8路"],
         "area": "龙港",
         "desc": "龙港8路（园博会专线）：城市公园 - 体育中心，园博公交接驳专线，途经青龙湖、图书馆、月湖公园",
-        "url": "龙港公交8路.html",
+        "url": "./龙港公交8路.html",
         "povUrl": "https://www.bilibili.com/video/BV1g7QJBPErF",
         "routeUrl": "8路.jpg",
-        "overviewUrl": "龙港公交8路.html"
+        "overviewUrl": "./龙港公交8路.html"
     },
     {
         "name": "龙港公交9路",
@@ -446,7 +446,7 @@ const busRoutes = [
         "desc": "",
         "url": "https://wiki.wzbus.net/wiki/苍南公交111路",
         "povUrl": "404.html",
-        "routeUrl": "111路.png",
+        "routeUrl": "https://map.baidu.com/search/@13405555.745313058,3168599.67,14.79z?querytype=bsl&bsltp=0&uid=1cc1b8954aa8b4c72b3a9fbd&c=178&provider=pc-aladin&da_src=shareurl",
         "overviewUrl": "https://wiki.wzbus.net/wiki/苍南公交111路"
     },
     {

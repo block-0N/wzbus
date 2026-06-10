@@ -11,18 +11,64 @@
     <link rel="stylesheet" href="./indexstyle.css">
     <title>改线公告</title>
     <style>
-        img {
-            width: 100%;
+        li p::before {
+            content: '·';
+            font-weight: 800;
+            margin: 0 12px;
         }
 
-        .img1 {
-            float: left;
-            width: 49%;
+        li p.white::before {
+            color: white;
         }
 
-        .img2 {
-            float: right;
-            width: 49%;
+        h4 {
+            text-indent: 1em;
+            margin-bottom: 0.85em;
+        }
+
+        figure {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f8f9fc;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        figure a {
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        figure img {
+            max-width: 85%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 6px;
+            border: 1px solid #e4edf5;
+            margin: 0 auto;
+            display: block;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        figcaption {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
+        }
+
+        .double {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3%;
+        }
+
+        @media (max-width:600px) {
+            .double {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
         }
     </style>
 </head>
@@ -39,17 +85,20 @@
     </header>
 
     <h1>改线公告</h1>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
+
+    <script src="./businfo.js"></script>
+    <script src="./stationinfo.js"></script>
+    <script src="./searchinfo.js"></script>
+
     <main>
         <h2>一、龙港公交</h2>
         <ul>
-            <li>
-                <h3>1路临时调整</h3>
-                <p>施工路段：启源路（海景路至疏港大道路段），预计工期至2026年5月30日</p>
-                <p>取消站点：启源路海景路口（往现代印务港）</p>
-                <p>绕行路线：海景路、世纪大道、疏港大道</p>
-                <a href="./1路临时调整.webp"><img src="./1路临时调整.webp" alt="1路临时调整">
-                </a>
-            </li>
             <li>
                 <h3>2路临时调整</h3>
                 <p>施工路段：沿江路（龙金大道至西六街路段）</p>
@@ -70,18 +119,21 @@
             </li>
             <li>
                 <h3>B11路调整</h3>
-                <p>曾用车型：2020年 金旅6米微公交 XML6606JEVA0C1
-                <p style="text-indent: 5em;">2022年 安凯6米微公交 HFF6600E6EV21</p>
-                <p style="text-indent: 5em;">2022年 宇通6米微公交 ZK6606BEVG1</p>
+                <p>曾用车型：2020年 金旅6米微公交 XML6606JEVA0C1</p>
+                <p style="text-indent: 5em;" class="white">2022年 安凯6米微公交 HFF6600E6EV21
+                </p>
+                <p style="text-indent: 5em;" class="white">2022年 宇通6米微公交 ZK6606BEVG1
                 </p>
                 <p>现用车型：2023年 安凯6米无站立 HFF6609G6EV22</p>
             </li>
             <li>
                 <h3>6路、17路、807路临时调整</h3>
                 <p>取消站点：下水门、徐家庄、龙港中学</p>
-                <a href="./17 807路临时调整.webp">
-                    <img src="./17 807路临时调整.webp" alt="6路、17路、807路临时调整">
-                </a>
+                <figure>
+                    <a href="./17 807路临时调整.webp">
+                        <img src="./17 807路临时调整.webp" alt="6路、17路、807路临时调整">
+                    </a>
+                </figure>
             </li>
             <li>
                 <h3>9路、K005路临时调整</h3>
@@ -92,31 +144,21 @@
                 <h3>808路临时调整</h3>
                 <p>取消站点：下水门、徐家庄、龙港中学、梧桥（往炎亭；埭金线站点）、仕家垟（往龙港客运中心）、陈宅、张家堡、陈华垟、东店（往炎亭）、严处（往龙港客运中心）</p>
                 <p>新增站点：御龙湾锦园（往炎亭）、世纪大道西三路口、体育馆（往龙港客运中心）、郭宕、梧桥（龙金大道站点）、薛家桥、文楼、后垟增、宜山大道</p>
-                <a href="./808路临时调整.png">
-                    <img src="./808路临时调整.png" alt="808路临时调整">
-                </a>
+                <figure>
+                    <a href="./808路临时调整.png">
+                        <img src="./808路临时调整.png" alt="808路临时调整">
+                    </a>
+                </figure>
             </li>
             <li>
                 <h3>808路调整</h3>
                 <p>取消站点：炎亭（原公交首末站）、友谊西路（往龙港客运中心）</p>
                 <p>新增站点：炎亭（位于文兴大道）、炎亭学校</p>
-                <a href="./808路调整.png">
-                    <img src="./808路调整.png" alt="808路调整">
-                </a>
-            </li>
-            <li>
-                <h3>新增8路（园博会专线）</h3>
-                <p>停靠站点：体育中心、青龙湖公园、经济产业发展中心、龙港农商银行、月湖路、政务客厅、城市公园</p>
-                <p>开通日期：2026年4月15日</p>
-                <p>运营时间：首班7:00，末班18:00。班次间隔70-75分钟一班</p>
-                <p>线路票价：免费</p>
-                <p>纪念车票：乘坐园博专线还能收获独家纪念品！龙港公交特别推出限量版精品车票，票面设计将园博会LOGO与龙港地标剪影巧妙融合，采用环保材质，兼具收藏价值与绿色理念。欢迎乘客上车后自行取阅留念，每人限领一张，把这份限定的“龙港记忆”带回家。
-                </p>
-                <p>
-                    <a href="./8路纪念车票.webp">
-                        <img src="./8路纪念车票.webp" alt="纪念车票">
+                <figure>
+                    <a href="./808路调整.png">
+                        <img src="./808路调整.png" alt="808路临时调整">
                     </a>
-                </p>
+                </figure>
             </li>
             <li>
                 <h3>部分线路发车间隔调整</h3>
@@ -135,24 +177,36 @@
                 <h3>
                     <a href="https://mp.weixin.qq.com/s/QIVH10TEz7burnMGC435Hg">111路、117路、119路临时调整</a>
                 </h3>
+                <p>施工路段：灵溪镇江湾路（建兴东路—塘北东路）</p>
+                <p>施工时间：2026年3月22日至2026年8月22日</p>
+                <h4>一、111路公交线路</h4>
+                <p>上行临时走向：江南新区→环城南路→公园路→玉苍路→华侨路→人民大道→车站大道→仁英路→渎浦路→玉苍路→兴园路→成功路→苍南书城</p>
+                <p>下行临时走向：苍南书城→成功路→兴园路→玉苍路→渎浦路→仁英路→车站大道→人民大道→华侨路→河滨路→城中路→玉苍路→公园路→环城南路→江南新区</p>
+                <h4>二、117路公交线路</h4>
+                <p>临时走向：秦岙站→建兴西路→建兴东路→华侨路→仁英路→上江路→站南路→通福路→联进村（往返一致）</p>
+                <h4>三、119路公交线路</h4>
+                <p>临时走向：苍南县社会福利中心→一小路→环城南路→公园路→玉苍路→望鹤路→建兴东路→江湾路→迎福路→车站大道→站南路→沪山新溪村（往返一致）</p>
+                <figure>
+                    <a href="./111、117、119路改.webp">
+                        <img src="./111、117、119路改.webp" alt="111、117、119路改线示意图" decoding="async" loading="lazy">
+                    </a>
+                    <figcaption>111、117、119路改线示意图</figcaption>
+                </figure>
             </li>
             <li>
                 <h3>
                     <a href="https://mp.weixin.qq.com/s/VP7vEIsvq7ZJBcTD2hATlw">111路调整</a>
                 </h3>
-            </li>
-            <li>
-                <h3>117路临时调整</h3>
-                <div>
-                    <a href="117路改1.png">
-                        <img src="117路改1.png" class="img1" alt="117路改1">
+                <h4>调整路线，由苍南书城调整至余桥社区始发</h4>
+                <p>取消车站：台商小镇、苍南书城</p>
+                <p>新增车站：星海学校、宏利水产、华山村、内李村、余桥社区</p>
+                <figure>
+                    <a href="./111.webp">
+                        <img src="./111.webp" alt="111路站牌">
                     </a>
-                    <a href="117路改2.png">
-                        <img src="117路改2.png" class="img2" alt="117路改2">
-                    </a>
-                </div>
+                    <figcaption>111路站牌</figcaption>
+                </figure>
             </li>
-
         </ul>
     </main>
 
