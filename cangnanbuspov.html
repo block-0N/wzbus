@@ -10,11 +10,33 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="indexstyle.css">
 </head>
 
 <body>
-    <h1 class="page-title">苍南公交POV合集</h1>
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+            <a href="index.html" class="nav-link">首页</a>
+            <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+            <a href="about.html" class="nav-link">关于我们</a>
+            <a href="tips.html" class="nav-link">乘车指南</a>
+        </nav>
+    </header>
+    <h1>苍南公交POV合集</h1>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
     <ul class="bus-list"></ul>
+    <footer>
+        <p>温州县域公交信息平台 © 2026 版权所有</p>
+        <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
+        <p>数据更新时间：2026年6月</p>
+    </footer>
+    <script src="./stationinfo.js"></script>
+    <script src="./searchinfo.js"></script>
     <script src="./businfo.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

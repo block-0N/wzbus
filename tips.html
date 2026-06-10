@@ -66,6 +66,16 @@
 
     <h1>龙港公交乘车指南</h1>
 
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
+
+    <script src="./businfo.js"></script>
+    <script src="./stationinfo.js"></script>
+    <script src="./searchinfo.js"></script>
+
     <main>
         <h2>一、乘车购票</h2>
         <p>1. 现金购票：无人售票，投币乘车，票价按线路公示金额收取（不找零）。</p>

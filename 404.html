@@ -23,6 +23,11 @@
             position: absolute;
             left: 0;
         }
+
+        .btn a,
+        .btn a:hover {
+            color: white;
+        }
     </style>
 </head>
 
@@ -39,15 +44,27 @@
 
     <h1>温州县域公交·龙港-苍南公交</h1>
 
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
+
+    <script src="./businfo.js"></script>
+    <script src="./stationinfo.js"></script>
+    <script src="./searchinfo.js"></script>
+
     <main style="text-align: center;">
-        <div style="font-size: 6rem;
+        <div style="
+            font-size: 6rem;
             font-weight: bold;
             color: #2980b9;
             margin-bottom: 20px;
-            opacity: 0.8;">404</div>
+            opacity: 0.8;
+        ">404</div>
         <h2 style="border: 0;">抱歉，你访问的页面不存在或已被移除</h2>
         <article>
-            <p>可能的原因：</p>
+            <p>可能的原因</p>
             <ul>
                 <li>页面地址输入错误</li>
                 <li>该页面已更新或迁移</li>
@@ -55,7 +72,9 @@
                 <li>暂无此页面</li>
             </ul>
         </article>
-        <a href="index.html" class="btn" style="position: static;text-decoration: none;margin: 12px 30px;">返回首页</a>
+        <button class="btn" style="position: static;text-decoration: none;margin: 12px 30px;">
+            <a href="index.html">返回首页</a>
+        </button>
     </main>
 
     <footer>

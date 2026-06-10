@@ -29,8 +29,9 @@ function searchRoute() {
     if (matchedRoutes.length > 0 || matchedSites.length > 0) {
         resultContainer.style.display = 'block';
         if (matchedRoutes.length > 0) {
-            const titleDom = document.createElement('h3');
+            const titleDom = document.createElement('h2');
             titleDom.innerText = '匹配公交线路';
+            titleDom.style.marginLeft = '1em';
             resultContainer.appendChild(titleDom);
             matchedRoutes.forEach(route => {
                 const item = document.createElement('div');
@@ -57,8 +58,9 @@ function searchRoute() {
             });
         }
         if (matchedSites.length > 0) {
-            const titleDom = document.createElement('h3');
+            const titleDom = document.createElement('h2');
             titleDom.innerText = '匹配站点信息';
+            titleDom.style.marginLeft = '1em';
             resultContainer.appendChild(titleDom);
             matchedSites.forEach(siteName => {
                 const siteItem = document.createElement('div');

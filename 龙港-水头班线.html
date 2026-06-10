@@ -5,12 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>龙港-水头班线</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="indexstyle.css">
     <link rel="stylesheet" href="./busintro.css">
 </head>
 
 <body>
-    <h1 class="page-title">龙港-水头班线</h1>
-
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+            <a href="index.html" class="nav-link">首页</a>
+            <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+            <a href="about.html" class="nav-link">关于我们</a>
+            <a href="tips.html" class="nav-link">乘车指南</a>
+        </nav>
+    </header>
+    <h1>龙港-水头班线</h1>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
     <div class="card">
         <h2>简介</h2>
         <p>龙港-水头班线是连接龙港市与水头镇的城际客运班线，曾是两地居民出行的核心线路，承载了近30余年的客运服务使命。</p>
@@ -18,7 +37,6 @@
             曾经这条线客流量趟趟爆满，20多台的配车以及5分钟不到的间隔让这条线充满辉煌，可惜因为公交化的推广如今这条线路没落到1台车5个班次，一天下来连20个人也没有，对于油费等补贴也不够支撑这条线路运营了，配车将于7月份下线，同时线路停运，陪伴了将近30多年的线路也慢慢走向末路，且坐且珍惜吧。
         </p>
     </div>
-
     <div class="top-row">
         <div class="card">
             <h2>历史与现状</h2>
@@ -80,7 +98,6 @@
         <p>龙港客运中心往水头客运中心方向：由龙港客运中心始发，经双排街、站港大道、龙金大道、鳌江一桥（龙港大桥）、六分线、S218、树贤东路、树贤中路、树贤西路、S218、泾川东路、站东路、腾龙东路，至水头客运中心。
         </p>
         <p>水头客运中心往龙港客运中心方向：由水头客运中心始发，经腾龙东路、站东路、泾川东路、S218、树贤西路、树贤中路、树贤东路、S218、六分线、鳌江一桥（龙港大桥）、龙金大道、站港大道、双排街，至龙港客运中心。</p>
-        <h2>路线</h2>
         <h3>停靠站点</h3>
         <div class="station-flex">
             <div class="station-col">
@@ -488,12 +505,14 @@
             </figcaption>
         </figure>
     </div>
-
-    <div class="footer">
+    <footer>
         <p>温州县域公交信息平台 © 2026 版权所有</p>
         <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
-        <p>数据更新时间：2026年5月</p>
-    </div>
+        <p>数据更新时间：2026年6月</p>
+    </footer>
+    <script src="./stationinfo.js"></script>
+    <script src="./searchinfo.js"></script>
+    <script src="./businfo.js"></script>
 </body>
 
 </html>

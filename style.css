@@ -1,28 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: "Microsoft YaHei", "Heiti SC", sans-serif;
-    background-color: #f5f7fa;
-    color: #333;
-    line-height: 1.6;
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.page-title {
-    text-align: center;
-    font-size: 2rem;
-    color: #2c3e50;
-    margin: 20px 0 30px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #3498db;
-}
-
 .bus-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -64,9 +39,5 @@ body {
 @media (max-width: 600px) {
     .bus-list {
         grid-template-columns: 1fr;
-    }
-
-    .page-title {
-        font-size: 1.5rem;
     }
 }
