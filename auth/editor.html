@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+    <link rel="manifest" href="../icons/site.webmanifest">
+    <link rel="stylesheet" href="../styles/indexstyle.css">
+    <link rel="stylesheet" href="../styles/auth.css">
+    <style>
+        div {
+            margin: 12px 0;
+            font-size: 15px;
+            color: #333;
+            word-break: break-all;
+        }
+
+        article input,
+        article textarea {
+            border: 1px solid #e0e6ed;
+            border-radius: 6px;
+            padding: 9px 12px;
+            font-size: 14px;
+            outline: none;
+            background: #ffffff;
+            transition: all 0.24s ease;
+            width: 100%;
+        }
+
+        textarea {
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        article input:focus,
+        article textarea:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.18);
+        }
+
+        article input:hover,
+        article textarea:hover {
+            border-color: #2980b9;
+        }
+
+        #editId {
+            display: none;
+        }
+
+        article {
+            width: calc(100% - 60px);
+        }
+
+        button {
+            display: inline-block;
+            /* width: 50%; */
+        }
+
+        .btg {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btg .btn {
+            position: static !important;
+            right: auto;
+            top: auto;
+            transform: none;
+            flex-shrink: 0;
+        }
+
+        .arb {
+            margin: 6px 0;
+            padding: 12px;
+            border: 1px solid #e0e6ed;
+            border-radius: 8px;
+            transition: 0.2s ease;
+        }
+
+        .arb:hover {
+            border-color: #3498db;
+            box-shadow: 0 2px 6px rgba(52, 152, 219, 0.1);
+        }
+
+        /* 头部 flex 行 */
+        .arb>div:nth-child(1) {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 标签容器 */
+        .arb>div:nth-child(2) {
+            margin: 8px 0;
+        }
+
+        /* 线路标签span */
+        .arb>div:nth-child(2)>span {
+            display: inline-block;
+            margin: 3px 4px;
+            padding: 3px 8px;
+            background-color: #e8f4fd;
+            border-radius: 16px;
+            font-size: 13px;
+        }
+
+        /* 标签内的×按钮 */
+        .arb>div:nth-child(2)>span>button {
+            margin-left: 6px;
+            padding: 1px 6px;
+            font-size: 12px;
+            border-radius: 50%;
+            background-color: #e0e6ed;
+            color: #333;
+        }
+
+        .arb>div:nth-child(2)>span>button:hover {
+            background-color: #cbd5e0;
+        }
+
+        /* 新增线路那一行 */
+        .arb>div:nth-child(3) {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .arb>div:nth-child(3)>input {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+            <a href="../index.html" class="nav-link">首页</a>
+            <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+            <a href="../pages/about.html" class="nav-link">关于我们</a>
+            <a href="../pages/tips.html" class="nav-link">乘车指南</a>
+        </nav>
+    </header>
+
+    <h1>管理后台</h1>
+
+    <main>
+        <h2>公交线路管理</h2>
+        <h3 id="formTitle">新增线路</h3>
+        <article>
+            <input type="hidden" id="editId">
+            <div>线路名称：<input id="name" placeholder="例如：1路"></div>
+            <div>所属区域：<input id="area" placeholder="例如：龙港"></div>
+            <div>线路简介：<br>
+                <textarea id="desc" rows="3"
+                    placeholder="例如：龙港1路：龙港客运中心 - 现代印务港，途经人民路、世纪大道、新城产业园，覆盖龙港主城区与新城核心产业区"></textarea>
+            </div>
+            <div>POV视频BV号：<input id="pov" placeholder="例如：BV1c6U5BAEA6"></div>
+            <div>路线图标识：<input id="route"
+                    placeholder="例如：w:ro8I65aPUwnIQgdCq8PuPtbba8FBXP4xkcGQSzVwksZwUDP8euexq1q01N1meCySvjsA0tSgwicyD4ZE85qGDRw">
+            </div>
+            <div class="btg">
+                <button onclick="saveItem()">保存</button>
+                <button onclick="clearForm()">清空</button>
+            </div>
+        </article>
+        <h3>批量导入公交线路JSON数组</h3>
+        <article>
+            <textarea id="importJsonBox" rows="10" placeholder="粘贴完整 [] 数组"></textarea>
+            <button onclick="batchImport()">导入</button>
+        </article>
+        <article id="tableWrap"></article>
+        <h2>公交站点管理</h2>
+        <h3 id="stationFormTitle">新增站点</h3>
+        <article>
+            <input type="hidden" id="stationEditId">
+            <div>站点名称：<input id="stationName" placeholder="例如：龙港客运中心"></div>
+            <h4>区域&线路可视化编辑</h4>
+            新增区域：
+            <div class="btg">
+                <input id="newAreaInput" placeholder="龙港 / 苍南">
+                <button onclick="addNewArea()" class="btn">添加</button>
+            </div>
+            <div id="areaListWrap"></div>
+            <div class="btg">
+                <button onclick="saveStation()">保存</button>
+                <button onclick="clearStationForm()">取消</button>
+            </div>
+            <input type="hidden" id="stationRoutesRaw">
+        </article>
+        <h3>批量导入公交站点JSON数组</h3>
+        <article>
+            <textarea id="stationImportBox" rows="10" placeholder="粘贴完整 [] 数组"></textarea>
+            <button onclick="batchImportStation()">导入</button>
+        </article>
+        <article id="stationTableWrap"></article>
+    </main>
+
+    <footer>
+        <p>温州县域公交信息平台 © 2026 版权所有</p>
+        <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
+        <p>数据更新时间：2026年8月</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
+    <script>
+        let busRoutes = [];
+
+        // 页面初始化
+        (async function init() {
+            // 权限校验：不是管理员直接跳转
+            const authRes = await requireAuth();
+            if (!authRes) return;
+            if (authRes.role !== "admin") {
+                alert("无权访问管理员面板");
+                location.href = "../index.html";
+                return;
+            }
+            await loadStationListAdmin();
+            await loadBusList();
+        })();
+
+        // 从数据库加载全部线路
+        async function loadBusList() {
+            const { data, error } = await sb
+                .from("bus_routes")
+                .select("*")
+                .order("name");
+
+            if (error) {
+                console.error(error);
+                alert("加载失败");
+                return;
+            }
+            busRoutes = data;
+            renderTable();
+        }
+
+        // 渲染表格列表
+        function renderTable() {
+            const wrap = document.getElementById("tableWrap");
+            wrap.innerHTML = "";
+            const title = document.createElement('h3');
+            title.textContent = '已有条目列表';
+            wrap.before(title)
+            busRoutes.forEach(item => {
+                const div = document.createElement("div");
+                div.className = "line-card";
+                div.innerHTML = `
+                    <h4>${item.area}${item.name}</h4>
+                    <div>${item.desc}</div>
+                    <div>POV:${item.pov}</div>
+                    <div>Route:${item.route}</div>
+                    <div class="btg">
+                        <button onclick="openEditForm('${item.id}')">编辑</button>
+                        <button onclick="deleteItem('${item.id}')">删除</button>
+                    </div>
+                `;
+                wrap.appendChild(div);
+            });
+        }
+
+        // 清空表单
+        function clearForm() {
+            document.getElementById("formTitle").innerText = "新增线路";
+            document.getElementById("editId").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("area").value = "";
+            document.getElementById("desc").value = "";
+            document.getElementById("pov").value = "";
+            document.getElementById("route").value = "";
+        }
+
+        // 打开编辑表单
+        function openEditForm(uuid) {
+            const target = busRoutes.find(r => r.id === uuid);
+            if (!target) return;
+
+            document.getElementById("formTitle").innerText = "编辑线路";
+            document.getElementById("editId").value = target.id;
+            document.getElementById("name").value = target.name;
+            document.getElementById("area").value = target.area;
+            document.getElementById("desc").value = target.desc;
+            document.getElementById("pov").value = target.pov;
+            document.getElementById("route").value = target.route;
+            location.href = "#formTitle";
+        }
+
+        // 保存
+        async function saveItem() {
+            const editId = document.getElementById("editId").value.trim();
+            const payload = {
+                name: document.getElementById("name").value.trim(),
+                area: document.getElementById("area").value.trim(),
+                desc: document.getElementById("desc").value.trim(),
+                pov: document.getElementById("pov").value.trim(),
+                route: document.getElementById("route").value.trim()
+            };
+
+            if (!payload.name || !payload.area) {
+                alert("线路名称、区域不能为空");
+                return;
+            }
+
+            let error;
+            if (!editId) {
+                // 新增
+                const res = await sb.from("bus_routes").insert([payload]);
+                error = res.error;
+            } else {
+                // 更新
+                const res = await sb.from("bus_routes").update(payload).eq("id", editId);
+                error = res.error;
+            }
+
+            if (error) {
+                console.error(error);
+                alert("保存失败：" + error.message);
+                return;
+            }
+
+            alert("保存成功");
+            loadBusList();
+        }
+
+        // 删除线路
+        async function deleteItem(uuid) {
+            if (!confirm("确定删除这条线路？无法恢复！")) return;
+            const { error } = await sb.from("bus_routes").delete().eq("id", uuid);
+            if (error) {
+                alert("删除失败");
+                console.error(error);
+                return;
+            }
+            loadBusList();
+        }
+
+        async function batchImport() {
+            const jsonStr = document.getElementById("importJsonBox").value.trim();
+            if (!jsonStr) return alert("请粘贴JSON数组");
+
+            let list;
+            try {
+                list = JSON.parse(jsonStr);
+            } catch (err) {
+                return alert("JSON语法错误，检查引号、逗号");
+            }
+
+            if (!Array.isArray(list)) return alert("根结构必须是数组 [ {...} ]");
+            const { error } = await sb.from("bus_routes").insert(list);
+            if (error) {
+                console.error(error);
+                alert("导入失败：" + error.message);
+            } else {
+                alert(`成功导入${list.length}条线路！`);
+                document.getElementById("importJsonBox").value = "";
+                loadBusList();
+            }
+        }
+
+        let stationList = [];
+        // 当前正在编辑的routes内存对象
+        let editRoutes = {};
+
+        // 加载所有站点
+        async function loadStationListAdmin() {
+            const { data, error } = await sb
+                .from("station_list")
+                .select("*")
+                .order("name");
+            if (error) {
+                console.error(error);
+                alert("站点加载失败");
+                return;
+            }
+            stationList = data;
+            renderStationTable();
+        }
+
+        // 站点列表渲染
+        function renderStationTable() {
+            const wrap = document.getElementById("stationTableWrap");
+            wrap.innerHTML = "";
+            const title = document.createElement('h3');
+            title.textContent = '已有条目列表';
+            wrap.before(title)
+            stationList.forEach(item => {
+                const div = document.createElement("div");
+                div.className = "line-card";
+                const routesText = JSON.stringify(item.routes, null, 1);
+                div.innerHTML = `
+                    <h4>${item.name}</h4>
+                    <p>${routesText}</p>
+                    <div class="btg">
+                        <button onclick="openEditStationForm('${item.id}')">编辑</button>
+                        <button onclick="deleteStation('${item.id}')">删除</button>
+                    </div>
+                `;
+                wrap.appendChild(div);
+            });
+        }
+
+        // 打开新增站点
+        function openAddStationForm() {
+            document.getElementById("stationFormTitle").innerText = "新增站点";
+            document.getElementById("stationEditId").value = "";
+            document.getElementById("stationName").value = "";
+            editRoutes = {};
+            renderAreaEditor();
+        }
+
+        // 打开编辑站点
+        function openEditStationForm(uuid) {
+            const target = stationList.find(s => s.id === uuid);
+            if (!target) return;
+
+            document.getElementById("stationFormTitle").innerText = "编辑站点";
+            document.getElementById("stationEditId").value = target.id;
+            document.getElementById("stationName").value = target.name;
+            // 复制原始routes到编辑内存
+            editRoutes = JSON.parse(JSON.stringify(target.routes));
+            renderAreaEditor();
+            // location.href = "#stationFormTitle";
+        }
+
+        function clearStationForm() {
+            document.getElementById("stationFormTitle").innerText = "新增站点";
+            document.getElementById("stationEditId").value = "";
+            document.getElementById("stationName").value = "";
+            document.getElementById("areaListWrap").innerHTML = "";
+        }
+
+        // 渲染可视化区域编辑器
+        function renderAreaEditor() {
+            const wrap = document.getElementById("areaListWrap");
+            wrap.innerHTML = "";
+
+            const areaNames = Object.keys(editRoutes);
+            if (areaNames.length === 0) {
+                wrap.innerHTML = "<div>暂无区域，请添加区域</div>";
+                return;
+            }
+
+            areaNames.forEach(area => {
+                const box = document.createElement("div");
+                box.className = "arb";
+
+                const routeArr = editRoutes[area];
+                let routeHtml = "";
+                routeArr.forEach((r, idx) => {
+                    routeHtml += `<span>${r}<button onclick="removeRoute('${area}',${idx})">×</button></span>`;
+                });
+
+                box.innerHTML = `
+                <div>
+                    <strong>${area}</strong>
+                    <button onclick="removeArea('${area}')">删除该区域</button>
+                </div>
+                <div>
+                    ${routeHtml}
+                </div>
+                <div>
+                    新增线路：<input data-area="${area}" placeholder="1路">
+                    <button onclick="addRouteToArea('${area}')">添加</button>
+                </div>
+                `;
+                wrap.appendChild(box);
+
+            });
+        }
+
+        // 添加新区域
+        function addNewArea() {
+            const input = document.getElementById("newAreaInput");
+            const area = input.value.trim();
+            if (!area) return alert("区域名称不能为空");
+            if (editRoutes[area]) return alert("该区域已存在");
+            editRoutes[area] = [];
+            input.value = "";
+            renderAreaEditor();
+        }
+
+        // 删除区域
+        function removeArea(area) {
+            if (!confirm(`确定删除区域【${area}】？`)) return;
+            delete editRoutes[area];
+            renderAreaEditor();
+        }
+
+        // 向区域添加线路
+        function addRouteToArea(area) {
+            const input = document.querySelector(`input[data-area="${area}"]`);
+            const routeName = input.value.trim();
+            if (!routeName) return alert("线路名称不能为空");
+            if (editRoutes[area].includes(routeName)) return alert("该线路已存在");
+            editRoutes[area].push(routeName);
+            input.value = "";
+            renderAreaEditor();
+        }
+
+        // 删除某一条线路
+        function removeRoute(area, idx) {
+            editRoutes[area].splice(idx, 1);
+            // 区域内线路清空后，可以选择保留空数组，或者自动删掉区域
+            renderAreaEditor();
+        }
+
+        // 保存站点
+        async function saveStation() {
+            const editId = document.getElementById("stationEditId").value.trim();
+            const name = document.getElementById("stationName").value.trim();
+            if (!name) {
+                alert("站点名称不能为空");
+                return;
+            }
+
+            const payload = {
+                name: name,
+                routes: editRoutes
+            };
+
+            let res;
+            if (!editId) {
+                res = await sb.from("station_list").insert([payload]);
+            } else {
+                res = await sb.from("station_list").update(payload).eq("id", editId);
+            }
+
+            const { error } = res;
+            if (error) {
+                alert("保存失败：" + error.message);
+                console.error(error);
+                return;
+            }
+
+            alert("保存成功");
+            clearStationForm();
+            loadStationListAdmin();
+        }
+
+        // 删除站点
+        async function deleteStation(uuid) {
+            if (!confirm("确定删除该站点？")) return;
+            const { error } = await sb.from("station_list").delete().eq("id", uuid);
+            if (error) {
+                alert("删除失败");
+                console.error(error);
+                return;
+            }
+            loadStationListAdmin();
+        }
+
+        // 批量导入（保留原有逻辑不变）
+        async function batchImportStation() {
+            const jsonStr = document.getElementById("stationImportBox").value.trim();
+            if (!jsonStr) return alert("粘贴JSON数组");
+            let list;
+            try {
+                list = JSON.parse(jsonStr);
+            } catch (e) {
+                return alert("JSON格式错误");
+            }
+            if (!Array.isArray(list)) return alert("根必须是数组 []");
+
+            const { error } = await sb.from("station_list").insert(list);
+            if (error) {
+                console.error(error);
+                alert("导入失败：" + error.message);
+            } else {
+                alert(`成功导入${list.length}个站点`);
+                document.getElementById("stationImportBox").value = "";
+                loadStationListAdmin();
+            }
+        }
+    </script>
+</body>
+
+</html>

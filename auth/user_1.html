@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户中心</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <h1>用户中心</h1>
+    <div class="user-info">
+      <span id="userEmail"></span>
+      <span id="userNick"></span>
+      <span class="badge badge-user">普通用户</span>
+      <button class="btn btn-danger" onclick="logout()">退出</button>
+      <!-- <button class="btn" onclick="window.location.href = ('../index.html')">主页</button> -->
+    </div>
+  </nav>
+  <div class="container">
+    <div class="panel">
+      <h2>欢迎 👋</h2>
+      <p>你已成功登录。这里是普通用户的主页，可以查看个人信息和使用基础功能。</p>
+    </div>
+    <div class="panel">
+      <h2>账户信息</h2>
+      <p><strong>邮箱：</strong><span id="infoEmail"></span></p>
+      <p><strong>用户 ID：</strong><span id="infoId"></span></p>
+      <p><strong>角色：</strong><span class="badge badge-user" id="role">user</span></p>
+    </div>
+    <div class="panel">
+      <h2>头像设置</h2>
+      <div>
+        <img id="avatarPreview"
+          style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:1px solid #ddd;" src="" alt="头像">
+      </div>
+      <input type="file" id="avatarInput" accept="image/png,image/jpeg,image/webp" style="margin:10px 0;">
+      <button class="btn" onclick="uploadAvatar()">保存头像</button>
+    </div>
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth.js"></script>
+  <script>
+    (async () => {
+      // 只校验是否登录，不限制角色
+      const session = await getSession();
+      if (!session) {
+        location.href = "login.html";
+        return;
+      }
+      const email = session.user.email;
+      const id = session.user.id;
+      const { data: profile } = await getProfile(session.user.id);
+
+      document.getElementById("userNick").textContent = profile?.nickname || "未设置昵称";
+      document.getElementById("userEmail").textContent = email;
+      document.getElementById("infoEmail").textContent = email;
+      document.getElementById("infoId").textContent = id;
+
+      // 根据角色动态切换标签
+      const roleBadge = document.querySelector(".badge");
+      if (profile?.role === "admin") {
+        roleBadge.className = "badge badge-admin";
+        roleBadge.textContent = "管理员";
+        document.querySelector("#role").textContent = "admin";
+        document.querySelector("#role").className = "badge badge-admin";
+      }
+      loadAvatar();
+    })();
+  </script>
+
+</body>
+
+</html>

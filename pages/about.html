@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+    <link rel="manifest" href="../icons/site.webmanifest">
+    <link rel="stylesheet" href="../styles/indexstyle.css">
+    <title>关于我们</title>
+    <style>
+        .contact-list {
+            list-style: none;
+            color: #2c3e50;
+        }
+
+        .contact-list li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .contact-list li span {
+            font-weight: 500;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .contact-list li {
+                font-size: 0.9rem;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+            <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+            <a href="../index.html" class="nav-link">返回首页</a>
+            <a href="tips.html" class="nav-link">乘车指南</a>
+        </nav>
+    </header>
+
+    <h1>关于我们</h1>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
+
+    <script src="../js/businfo.js"></script>
+    <script src="../js/stationinfo.js"></script>
+    <script src="../js/searchinfo.js"></script>
+
+    <main>
+        <h2>平台简介</h2>
+        <p>
+            温州县域公交信息平台是专注于龙港、苍南两地公交出行服务的公益性信息平台，旨在为本地居民及外来访客提供全面、准确、及时的公交线路信息，解决公交出行信息查询不便的问题。
+        </p>
+        <p>
+            平台自上线以来，持续收集整理龙港、苍南区域内的公交线路POV视频、路线图、线路运营概况等信息，力求覆盖两地所有常规公交线路，为用户的日常出行、出行规划提供可靠参考。
+        </p>
+        <p>
+            我们坚持公益性原则，所有信息均免费向用户开放，不收取任何查询费用，平台的运营主要依靠志愿者的信息收集与维护，以及热心用户的反馈与支持。
+        </p>
+
+        <h2>我们的宗旨</h2>
+        <p>
+            以用户需求为核心，以信息准确为基础，以服务便捷为目标，打造龙港-苍南地区最实用的公交信息查询平台，助力本地公共交通出行的便捷化、透明化，提升市民出行体验。
+        </p>
+        <p>
+            我们会定期更新公交线路的调整信息、站点变化、运营时间变更等内容，确保平台信息与实际运营情况保持一致，同时也欢迎用户反馈信息错误或遗漏，共同完善平台内容。
+        </p>
+        <aside>
+            <strong>图片提示：</strong>
+            本平台提供的图片部分来自微信公众号，若访问失败请复制链接后在浏览器地址栏粘贴重新打开
+        </aside>
+        <h2>联系方式</h2>
+        <section>
+            <h3>联系我们</h3>
+            <ul class="contact-list">
+                <li><span>意见收集平台：</span><a href="404.html">点此进入</a></li>
+                <li><span>信息纠错反馈：</span>可发送邮件说明具体问题，我们会在3个工作日内处理</li>
+                <li><span>合作洽谈：</span>请在邮件中注明“合作洽谈”+具体合作内容</li>
+            </ul>
+        </section>
+
+        <aside>
+            <strong>免责声明：</strong>
+            本平台提供的公交线路信息仅供参考，实际运营以公交公司官方发布及现场运营情况为准。本平台不承担因信息更新不及时、信息误差等导致的出行不便或损失。如需精准出行信息，建议拨打公交服务热线或咨询站点工作人员。平台内的POV视频、路线图等内容均为志愿者整理制作，禁止商用转载，如需非商用转载请注明出处。
+        </aside>
+    </main>
+
+    <footer>
+        <p>温州县域公交信息平台 © 2026 版权所有</p>
+        <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
+        <p>数据更新时间：2026年8月</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+.bus-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    list-style: none;
+}
+
+.bus-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 12px 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bus-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+.bus-link {
+    text-decoration: none;
+    color: #3498db;
+    font-size: 1rem;
+    display: block;
+}
+
+.bus-link:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+.special-tag {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-left: 5px;
+}
+
+@media (max-width: 600px) {
+    .bus-list {
+        grid-template-columns: 1fr;
+    }
+}

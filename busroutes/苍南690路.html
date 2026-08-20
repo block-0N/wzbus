@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苍南690路</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+    <link rel="manifest" href="../icons/site.webmanifest">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/indexstyle.css">
+    <link rel="stylesheet" href="../styles/busintro.css">
+</head>
+
+<body>
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+            <a href="../index.html" class="nav-link">首页</a>
+            <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+            <a href="../pages/about.html" class="nav-link">关于我们</a>
+            <a href="../pages/tips.html" class="nav-link">乘车指南</a>
+        </nav>
+    </header>
+    <h1>苍南690路</h1>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
+    <div class="card">
+        <h2>简介</h2>
+        <p>苍南690路是苍南县一条连接桥墩车站与蔡垟村的村村通公交线路，主要服务于桥墩镇局部区域出行。</p>
+    </div>
+    <div class="top-row">
+        <div class="card">
+            <h2>历史</h2>
+            <ul class="history">
+                <li>不详</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2>概览</h2>
+            <table class="info-table">
+                <tr>
+                    <th>系统</th>
+                    <td>苍南公交</td>
+                </tr>
+                <tr>
+                    <th>运营公司</th>
+                    <td>苍南县城乡公共交通有限公司</td>
+                </tr>
+                <tr>
+                    <th>运营状态</th>
+                    <td>运营中</td>
+                </tr>
+                <tr>
+                    <th>主站</th>
+                    <td>桥墩车站</td>
+                </tr>
+                <tr>
+                    <th>副站</th>
+                    <td>蔡垟村</td>
+                </tr>
+                <tr>
+                    <th>全程运行时长</th>
+                    <td>20分钟左右</td>
+                </tr>
+                <tr>
+                    <th>收费</th>
+                    <td>3元</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>路线</h2>
+        <h3>停靠站点</h3>
+        <div class="station-flex">
+            <div class="station-col">
+                <table class="station-table">
+                    <thead>
+                        <tr>
+                            <td colspan="2">往 蔡垟村 方向</td>
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>停靠站</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="num">1</td>
+                            <td>桥墩车站</td>
+                        </tr>
+                        <tr>
+                            <td class="num">2</td>
+                            <td>桥墩派出所</td>
+                        </tr>
+                        <tr>
+                            <td class="num">3</td>
+                            <td>桥墩公交站</td>
+                        </tr>
+                        <tr>
+                            <td class="num">4</td>
+                            <td>陈树枫</td>
+                        </tr>
+                        <tr>
+                            <td class="num">5</td>
+                            <td>树枫村民中心</td>
+                        </tr>
+                        <tr>
+                            <td class="num">6</td>
+                            <td>树枫村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">7</td>
+                            <td>关庙桥头</td>
+                        </tr>
+                        <tr>
+                            <td class="num">8</td>
+                            <td>蔡垟山路口</td>
+                        </tr>
+                        <tr>
+                            <td class="num">9</td>
+                            <td>蔡垟村</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="station-col">
+                <table class="station-table">
+                    <thead>
+                        <tr>
+                            <td colspan="2">往 桥墩车站 方向</td>
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>停靠站</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="num">1</td>
+                            <td>蔡垟村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">2</td>
+                            <td>蔡垟山路口</td>
+                        </tr>
+                        <tr>
+                            <td class="num">3</td>
+                            <td>关庙桥头</td>
+                        </tr>
+                        <tr>
+                            <td class="num">4</td>
+                            <td>树枫村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">5</td>
+                            <td>树枫村民中心</td>
+                        </tr>
+                        <tr>
+                            <td class="num">6</td>
+                            <td>陈树枫</td>
+                        </tr>
+                        <tr>
+                            <td class="num">7</td>
+                            <td>桥墩公交站</td>
+                        </tr>
+                        <tr>
+                            <td class="num">8</td>
+                            <td>桥墩派出所</td>
+                        </tr>
+                        <tr>
+                            <td class="num">9</td>
+                            <td>桥墩车站</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>服务时间及班次</h2>
+        <div>
+            <div class="station-col">
+                <table class="station-table">
+                    <thead>
+                        <tr>
+                            <td colspan="2">桥墩 发车时间</td>
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>班次</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="num">1</td>
+                            <td>06:30</td>
+                        </tr>
+                        <tr>
+                            <td class="num">2</td>
+                            <td>07:30</td>
+                        </tr>
+                        <tr>
+                            <td class="num">3</td>
+                            <td>08:30</td>
+                        </tr>
+                        <tr>
+                            <td class="num">4</td>
+                            <td>09:30</td>
+                        </tr>
+                        <tr>
+                            <td class="num">5</td>
+                            <td>13:20</td>
+                        </tr>
+                        <tr>
+                            <td class="num">6</td>
+                            <td>15:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="station-col">
+                <table class="station-table">
+                    <thead>
+                        <tr>
+                            <td colspan="2">蔡垟村 发车时间</td>
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>班次</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="num">1</td>
+                            <td>07:00</td>
+                        </tr>
+                        <tr>
+                            <td class="num">2</td>
+                            <td>08:00</td>
+                        </tr>
+                        <tr>
+                            <td class="num">3</td>
+                            <td>09:00</td>
+                        </tr>
+                        <tr>
+                            <td class="num">4</td>
+                            <td>10:00</td>
+                        </tr>
+                        <tr>
+                            <td class="num">5</td>
+                            <td>13:50</td>
+                        </tr>
+                        <tr>
+                            <td class="num">6</td>
+                            <td>15:30</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="station-col">
+                <table class="station-table">
+                    <thead>
+                        <tr>
+                            <td colspan="2">运营说明</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>本线路周二、周日不发车</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>温州县域公交信息平台 © 2026 版权所有</p>
+        <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
+        <p>数据更新时间：2026年6月</p>
+    </footer>
+    <script src="../js/stationinfo.js"></script>
+    <script src="../js/searchinfo.js"></script>
+    <script src="../js/businfo.js"></script>
+    <script src="../js/searchstation.js"></script>
+</body>
+
+</html>

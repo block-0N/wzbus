@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+    <link rel="manifest" href="../icons/site.webmanifest">
+    <link rel="stylesheet" href="../styles/indexstyle.css">
+    <title>乘车指南</title>
+    <style>
+        .transfer-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        .transfer-table th,
+        .transfer-table td {
+            border: 1px solid #d0e1f9;
+            padding: 10px;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .transfer-table th {
+            background-color: #d6e9fc;
+            color: #2c3e50;
+        }
+
+        .transfer-note {
+            font-size: 0.95rem;
+            color: #2c3e50;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+
+            .transfer-table th,
+            .transfer-table td {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .transfer-note {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+            <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+            <a href="about.html" class="nav-link">关于我们</a>
+            <a href="../index.html" class="nav-link">返回首页</a>
+        </nav>
+    </header>
+
+    <h1>龙港公交乘车指南</h1>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
+
+    <script src="../js/businfo.js"></script>
+    <script src="../js/stationinfo.js"></script>
+    <script src="../js/searchinfo.js"></script>
+
+    <main>
+        <h2>一、乘车购票</h2>
+        <p>1. 现金购票：无人售票，投币乘车，票价按线路公示金额收取（不找零）。</p>
+        <p>2. 刷卡乘车：支持市民卡9 折优惠乘车，龙港户籍小学至高中在校学生持本人市民卡开通的学生卡可享受龙港公交 5 折优惠乘车。</p>
+        <p>3. 移动支付：支付宝乘车码、微信乘车码 9 折优惠乘车。</p>
+        <p>4. 其他证件：现役军人、退役军人、“三属人员”、驻龙港部队官兵、在职消防救援人员、浙江省荣誉献血证持有者、龙港市政府表彰的 “见义勇为”
+            荣誉称号获得者、龙港市户籍获得县级以上人民政府表彰的 “见义勇为” 荣誉称号相关人员、龙港市高层次人才、龙港户籍三孩家庭父母、龙港户籍特困人群和龙港户籍残疾人，凭有效证件可免费乘车。</p>
+        <p>5.儿童乘车：成年乘客可免费携带身高不足 1.2 米的儿童乘车；1.2-1.5 米儿童 5 折乘车；1.5 米以上全票乘车。</p>
+
+        <h2>二、乘车规则</h2>
+        <p>1.乘车前请事先兑换好零钱，上车请主动投币或购票，自觉接受检查。</p>
+        <p>2.在规定站台有序候车，文明乘车，先下后上，车未停稳请勿强行上下车。</p>
+        <p>3.老、弱、病、残、孕及怀抱婴幼儿的乘客，优先使用爱心专座；乘客应提倡尊老爱幼、文明乘车的美德，主动给有需要的乘客让座和提供方便。</p>
+        <p>4.维护站内、车内乘车秩序，确保乘车安全，请勿与驾驶员闲谈。</p>
+        <p>5.保持站内、车内环境卫生，不喧哗、不饮食、不抽烟、不随地吐痰、不乱扔废弃物。</p>
+        <p>6.乘客应注意保管好随身携带的行李物品，防止遗落，行李物品不能占用座位、不得占用通道及阻碍其他乘客通行。</p>
+        <p>7.严禁携带动物、易燃易爆、危险品、管制刀具和有碍行车安全的物品乘车。</p>
+        <p>8.爱护站内、车内设施，不蹬踏座椅，不乱写乱画，不损坏公物。</p>
+        <p>9.乘车期间请扶好坐稳，请勿将头、手伸出窗外，以免车辆晃动发生意外。</p>
+        <p>10.下车前请提前做好准备，并按铃向驾驶员示意，确认到站后及时下车，避免漏乘、错乘。</p>
+        <p>11.上车前请向司机招手，上车时根据驾驶员指引一次性支付应付车费，下车时无需再次刷卡、扫码。</p>
+
+        <h2>三、线路信息查询</h2>
+        <p>1. 站点查询：各公交站台公示有线路走向、站点列表及首末班时间，部分智能站牌可实时查看公交到站时间。</p>
+        <p>2. 线上查询：可通过官方公众号、“掌上公交”小程序查询实时公交、线路调整等信息。</p>
+        <p>3. 人工咨询：服务热线（龙港公交：0577-68696108，苍南公交：0577-64767616）。</p>
+
+        <h2>四、收费规则</h2>
+        <p>1. 城市公交：2元一票制。</p>
+        <p>2. 跨县公交（K字头）：3元一票制。</p>
+        <p>3. 跨县公交（长途班线）：阶梯票价收费，以实际为准。</p>
+        <section>
+            <h3>龙港公交换乘优惠规则</h3>
+            <table class="transfer-table">
+                <thead>
+                    <tr>
+                        <th>第一程线路</th>
+                        <th>第二程线路</th>
+                        <th>第二程优惠后车费</th>
+                        <th>时限</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1 / 2 / 5 / 6 / 7 / 9 / 10 / 11 / 12 / 13 / 15 / 16 / 17 / A1 / A2 / A5 / A6 / B1 / B2 / B3
+                            / B5 / B11 / D01 / 801 / 802 / 803 / 805 / 806 / 807 / 808 / K001（只限龙港车辆） / K002 / K003 /
+                            K005</td>
+                        <td>1 / 2 / 5 / 6 / 7 / 9 / 10 / 11 / 12 / 13 / 15 / 16 / 17 / A1 / A2 / A5 / A6 / B1 / B2 / B3
+                            / B5 / B11 / D01</td>
+                        <td>0.01元</td>
+                        <td>120分钟</td>
+                    </tr>
+                </tbody>
+            </table>
+            <aside>
+                <strong>注：</strong><br>
+                1. 必须使用同一软件同一账户的乘车码才可享受换乘优惠。除乘车码外的其他支付方式均不可享受换乘优惠。<br>
+                2. 第一程及第二程须为不同线路。<br>
+                3. 享受换乘优惠后的下一次乘车将重新视为首次乘车（第一程）。<br>
+            </aside>
+        </section>
+
+        <h2>六、失物招领与投诉建议</h2>
+        <p>1. 失物招领：乘车遗失物品可拨打服务热线登记，或前往公交总站失物招领处查询；</p>
+        <p>2. 投诉建议：对运营服务有意见/建议，可通过热线、公众号留言反馈，我们将及时处理。</p>
+    </main>
+
+    <footer>
+        <p>温州县域公交信息平台 © 2026 版权所有</p>
+        <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
+        <p>数据更新时间：2026年6月</p>
+    </footer>
+</body>
+
+</html>

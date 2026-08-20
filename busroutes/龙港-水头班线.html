@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>龙港-水头班线</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="indexstyle.css">
+    <link rel="stylesheet" href="./busintro.css">
+</head>
+
+<body>
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+            <a href="index.html" class="nav-link">首页</a>
+            <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+            <a href="about.html" class="nav-link">关于我们</a>
+            <a href="tips.html" class="nav-link">乘车指南</a>
+        </nav>
+    </header>
+    <h1>龙港-水头班线</h1>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
+    <div class="card">
+        <h2>简介</h2>
+        <p>龙港-水头班线是连接龙港市与水头镇的城际客运班线，曾是两地居民出行的核心线路，承载了近30余年的客运服务使命。</p>
+        <p class="desc-text">
+            曾经这条线客流量趟趟爆满，20多台的配车以及5分钟不到的间隔让这条线充满辉煌，可惜因为公交化的推广如今这条线路没落到1台车5个班次，一天下来连20个人也没有，对于油费等补贴也不够支撑这条线路运营了，配车将于7月份下线，同时线路停运，陪伴了将近30多年的线路也慢慢走向末路，且坐且珍惜吧。
+        </p>
+    </div>
+    <div class="top-row">
+        <div class="card">
+            <h2>历史</h2>
+            <ul class="history">
+                <li>1990年6月：龙港汽车站正式投运后，该线路纳入正规站场管理，实现定点、定班、定价运营，初期车型以 17-19 座普通中巴为主，单程票价约 3-5 元，成为两地居民出行的核心通道。</li>
+                <li>1995年5月：平阳县长发汽车运输有限公司正式成立，该线路逐步纳入公司化运营框架，开启了规范化管理的进程。</li>
+                <li>2001年：水头客运中心建成投用，成为平阳北港片区客运枢纽，该线路起讫站正式固定为水头客运中心↔龙港客运中心，完成站对站标准化运营升级，班次大幅加密，客流进入稳定高峰期。</li>
+                <li>2002年：龙港车站完成改制，升级为国家二级汽车客运站，该线路同步完成运营规范升级，全面淘汰老旧车辆，统一更换为空调中巴，运营舒适度显著提升，票价逐步调整至 10 元左右，日均客流峰值超 800
+                    人次。</li>
+                <li>2003年前后：该线路完成全面公司化专营改制，由平阳县长发汽车运输有限公司独家运营，彻底取缔个体挂靠、无证黑车运营，安全管理、服务质量实现全面规范化。</li>
+                <li>2010-2020年：受私家车普及、城际巴士分流影响，线路客流有所回落，运营方根据客流需求动态微调班次密度，同时持续更新换代运营车辆，保持 19 座中型客车的合规配置，单程票价调整至 15
+                    元左右，核心服务始终保持稳定。</li>
+                <li>2022年2月：平阳县交通运输局公示该线路运力调整公告，完成运营车辆的补充更新，进一步保障了线路的常态化运营能力。</li>
+                <li>2024年6月：因客流稀少加之部分车辆报废，配车减少至1辆，2026年7月配车将下线，线路同步停运。</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2>概览</h2>
+            <table class="info-table">
+                <tr>
+                    <th>系统</th>
+                    <td>龙港公交、平阳公交</td>
+                </tr>
+                <tr>
+                    <th>运营公司</th>
+                    <td>平阳县长发汽车运输有限公司</td>
+                </tr>
+                <tr>
+                    <th>运营状态</th>
+                    <td>运营中（即将停运）</td>
+                </tr>
+                <tr>
+                    <th>主站</th>
+                    <td>龙港客运中心</td>
+                </tr>
+                <tr>
+                    <th>副站</th>
+                    <td>水头客运中心</td>
+                </tr>
+                <tr>
+                    <th>配车数量</th>
+                    <td>1辆</td>
+                </tr>
+                <tr>
+                    <th>全程运行时长</th>
+                    <td>50分钟左右</td>
+                </tr>
+                <tr>
+                    <th>收费</th>
+                    <td>3-12元</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>路线</h2>
+        <h3>正式路线</h3>
+        <p>龙港客运中心往水头客运中心方向：由龙港客运中心始发，经双排街、站港大道、龙金大道、鳌江一桥（龙港大桥）、六分线、S218、树贤东路、树贤中路、树贤西路、S218、泾川东路、站东路、腾龙东路，至水头客运中心。
+        </p>
+        <p>水头客运中心往龙港客运中心方向：由水头客运中心始发，经腾龙东路、站东路、泾川东路、S218、树贤西路、树贤中路、树贤东路、S218、六分线、鳌江一桥（龙港大桥）、龙金大道、站港大道、双排街，至龙港客运中心。</p>
+        <h3>停靠站点</h3>
+        <div class="station-flex">
+            <div class="station-col">
+                <table class="station-table">
+                    <thead>
+                        <tr>
+                            <td colspan="2">往 龙港客运中心 方向</td>
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>停靠站</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="num">1</td>
+                            <td>水头客运中心</td>
+                        </tr>
+                        <tr>
+                            <td class="num">2</td>
+                            <td>占江村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">3</td>
+                            <td>宠物小镇</td>
+                        </tr>
+                        <tr>
+                            <td class="num">4</td>
+                            <td>建安村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">5</td>
+                            <td>青岙村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">6</td>
+                            <td>温家庄</td>
+                        </tr>
+                        <tr>
+                            <td class="num">7</td>
+                            <td>胜利村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">8</td>
+                            <td>显桥</td>
+                        </tr>
+                        <tr>
+                            <td class="num">9</td>
+                            <td>燕州村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">10</td>
+                            <td>陶贡</td>
+                        </tr>
+                        <tr>
+                            <td class="num">11</td>
+                            <td>华联村西</td>
+                        </tr>
+                        <tr>
+                            <td class="num">12</td>
+                            <td>华联村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">13</td>
+                            <td>下泛村西</td>
+                        </tr>
+                        <tr>
+                            <td class="num">14</td>
+                            <td>下泛村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">15</td>
+                            <td>兴贤村（招呼站）</td>
+                        </tr>
+                        <tr>
+                            <td class="num">16</td>
+                            <td>树贤小学（招呼站）</td>
+                        </tr>
+                        <tr>
+                            <td class="num">17</td>
+                            <td>康乐路口（招呼站）</td>
+                        </tr>
+                        <tr>
+                            <td class="num">18</td>
+                            <td>麻步三中（招呼站）</td>
+                        </tr>
+                        <tr>
+                            <td class="num">19</td>
+                            <td>麻步三桥（招呼站）</td>
+                        </tr>
+                        <tr>
+                            <td class="num">20</td>
+                            <td>塔下</td>
+                        </tr>
+                        <tr>
+                            <td class="num">21</td>
+                            <td>兴源村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">22</td>
+                            <td>桃源社区</td>
+                        </tr>
+                        <tr>
+                            <td class="num">23</td>
+                            <td>桃源村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">24</td>
+                            <td>殡改服务中心</td>
+                        </tr>
+                        <tr>
+                            <td class="num">25</td>
+                            <td>包岙村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">26</td>
+                            <td>包田村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">27</td>
+                            <td>交警三中队</td>
+                        </tr>
+                        <tr>
+                            <td class="num">28</td>
+                            <td>梅溪路口</td>
+                        </tr>
+                        <tr>
+                            <td class="num">29</td>
+                            <td>钱仓</td>
+                        </tr>
+                        <tr>
+                            <td class="num">30</td>
+                            <td>东门街口</td>
+                        </tr>
+                        <tr>
+                            <td class="num">31</td>
+                            <td>龙港大桥口（招呼站）</td>
+                        </tr>
+                        <tr>
+                            <td class="num">32</td>
+                            <td>礼品城</td>
+                        </tr>
+                        <tr>
+                            <td class="num">33</td>
+                            <td>龙浦社区</td>
+                        </tr>
+                        <tr>
+                            <td class="num">34</td>
+                            <td>龙港卫生院</td>
+                        </tr>
+                        <tr>
+                            <td class="num">35</td>
+                            <td>龙港客运中心</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="station-col">
+                <table class="station-table">
+                    <thead>
+                        <tr>
+                            <td colspan="2">往 水头客运中心 方向</td>
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>停靠站</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="num">1</td>
+                            <td>龙港客运中心</td>
+                        </tr>
+                        <tr>
+                            <td class="num">2</td>
+                            <td>龙港卫生院</td>
+                        </tr>
+                        <tr>
+                            <td class="num">3</td>
+                            <td>龙浦社区</td>
+                        </tr>
+                        <tr>
+                            <td class="num">4</td>
+                            <td>礼品城</td>
+                        </tr>
+                        <tr>
+                            <td class="num">5</td>
+                            <td>龙港大桥口（招呼站）</td>
+                        </tr>
+                        <tr>
+                            <td class="num">6</td>
+                            <td>东门街口</td>
+                        </tr>
+                        <tr>
+                            <td class="num">7</td>
+                            <td>钱仓</td>
+                        </tr>
+                        <tr>
+                            <td class="num">8</td>
+                            <td>梅溪路口</td>
+                        </tr>
+                        <tr>
+                            <td class="num">9</td>
+                            <td>交警三中队</td>
+                        </tr>
+                        <tr>
+                            <td class="num">10</td>
+                            <td>包田村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">11</td>
+                            <td>包岙村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">12</td>
+                            <td>殡改服务中心</td>
+                        </tr>
+                        <tr>
+                            <td class="num">13</td>
+                            <td>桃源村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">14</td>
+                            <td>桃源社区</td>
+                        </tr>
+                        <tr>
+                            <td class="num">15</td>
+                            <td>兴源村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">16</td>
+                            <td>塔下</td>
+                        </tr>
+                        <tr>
+                            <td class="num">17</td>
+                            <td>麻步三桥（招呼站）</td>
+                        </tr>
+                        <tr>
+                            <td class="num">18</td>
+                            <td>麻步三中（招呼站）</td>
+                        </tr>
+                        <tr>
+                            <td class="num">19</td>
+                            <td>康乐路口（招呼站）</td>
+                        </tr>
+                        <tr>
+                            <td class="num">20</td>
+                            <td>树贤小学（招呼站）</td>
+                        </tr>
+                        <tr>
+                            <td class="num">21</td>
+                            <td>兴贤村（招呼站）</td>
+                        </tr>
+                        <tr>
+                            <td class="num">22</td>
+                            <td>下泛村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">23</td>
+                            <td>下泛村西</td>
+                        </tr>
+                        <tr>
+                            <td class="num">24</td>
+                            <td>华联村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">25</td>
+                            <td>华联村西</td>
+                        </tr>
+                        <tr>
+                            <td class="num">26</td>
+                            <td>陶贡</td>
+                        </tr>
+                        <tr>
+                            <td class="num">27</td>
+                            <td>燕州村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">28</td>
+                            <td>显桥</td>
+                        </tr>
+                        <tr>
+                            <td class="num">29</td>
+                            <td>胜利村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">30</td>
+                            <td>温家庄</td>
+                        </tr>
+                        <tr>
+                            <td class="num">31</td>
+                            <td>青岙村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">32</td>
+                            <td>建安村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">33</td>
+                            <td>宠物小镇</td>
+                        </tr>
+                        <tr>
+                            <td class="num">34</td>
+                            <td>占江村</td>
+                        </tr>
+                        <tr>
+                            <td class="num">35</td>
+                            <td>水头客运中心</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>服务时间及班次</h2>
+        <div>
+            <div class="station-col">
+                <table class="station-table">
+                    <thead>
+                        <tr>
+                            <td colspan="2">龙港 发车时间</td>
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>班次</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="num">1</td>
+                            <td>06:20</td>
+                        </tr>
+                        <tr>
+                            <td class="num">2</td>
+                            <td>08:50</td>
+                        </tr>
+                        <tr>
+                            <td class="num">3</td>
+                            <td>11:30</td>
+                        </tr>
+                        <tr>
+                            <td class="num">4</td>
+                            <td>14:00</td>
+                        </tr>
+                        <tr>
+                            <td class="num">5</td>
+                            <td>16:20</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="station-col">
+                <table class="station-table">
+                    <thead>
+                        <tr>
+                            <td colspan="2">水头 发车时间</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>无固定发车时间，大多在龙港发车后70-90分钟发车</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>使用车辆</h2>
+        <div class="station-col">
+            <table class="station-table">
+                <thead>
+                    <tr>
+                        <td colspan="4">
+                            龙港-水头班线 车辆列表
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>车号/车牌</th>
+                        <th>车型</th>
+                        <th>服务线路</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>浙CC5838</b></td>
+                        <td>广汽骏威GZ6591W1</td>
+                        <td>龙港-水头班线</td>
+                        <td>该车辆将于2026年7月正式下线，线路同步停运</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <figure>
+            <a href="./龙港-水头班线配车.webp">
+                <img src="./龙港-水头班线配车.webp" decoding="async" loading="lazy" width="100%">
+            </a>
+            <figcaption>
+                <center>广汽骏威GZ6591W1</center>
+            </figcaption>
+        </figure>
+    </div>
+    <footer>
+        <p>温州县域公交信息平台 © 2026 版权所有</p>
+        <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
+        <p>数据更新时间：2026年6月</p>
+    </footer>
+    <script src="./stationinfo.js"></script>
+    <script src="./searchinfo.js"></script>
+    <script src="./businfo.js"></script>
+    <script src="./searchstation.js"></script>
+</body>
+
+</html>

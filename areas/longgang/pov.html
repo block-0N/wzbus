@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>龙港公交POV合集</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../../icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../icons/favicon-16x16.png">
+    <link rel="manifest" href="../../icons/site.webmanifest">
+    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../styles/indexstyle.css">
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../auth/auth.js"></script>
+    <script src="../../js/stationinfo.js"></script>
+    <script src="../../js/businfo.js"></script>
+    <script src="../../js/renderpage.js"></script>
+    <script src="../../js/renderitem.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            runRender(renderpage);
+            runTask(renderitem, "龙港", "pov");
+        });
+    </script>
+    <script src="../../js/searchinfo.js"></script>
+</body>
+
+</html>

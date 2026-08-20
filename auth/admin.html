@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+    <link rel="manifest" href="../icons/site.webmanifest">
+    <link rel="stylesheet" href="../styles/indexstyle.css">
+    <link rel="stylesheet" href="../styles/auth.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border: 1px solid #e5e7eb;
+        }
+
+        th {
+            background-color: #f3f4f6;
+            font-weight: 600;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        tbody tr:hover {
+            background-color: #eff6ff;
+        }
+
+        /* 角色标签样式 */
+        .admin {
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+
+        .user {
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #ddd;
+        }
+
+        aside {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: end;
+        }
+    </style>
+</head>
+
+
+<body>
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+            <a href="../index.html" class="nav-link">首页</a>
+            <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+            <a href="about.html" class="nav-link">关于我们</a>
+            <a href="tips.html" class="nav-link">乘车指南</a>
+        </nav>
+    </header>
+
+
+    <h1>管理后台</h1>
+
+    <aside>
+        <img id="avatarPreview" src="" alt="头像">
+        <span id="userEmail"></span>
+        <span id="userNick"></span>
+        <span class="admin">管理员</span>
+        <button onclick="logout()" type="button">退出登录</button>
+    </aside>
+
+    <main>
+        <article>
+            <h2>管理员控制台</h2>
+            <p>你拥有管理员权限，可以查看所有注册用户列表。如需设置其他用户为管理员，请在 Supabase 后台修改 profiles 表的 role 字段。</p>
+        </article>
+        <article>
+            <h2>用户列表</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>邮箱</th>
+                        <th>昵称</th>
+                        <th>角色</th>
+                        <th>注册时间</th>
+                    </tr>
+                </thead>
+                <tbody id="userTable"></tbody>
+            </table>
+        </article>
+    </main>
+
+
+    <footer>
+        <p>温州县域公交信息平台 © 2026 版权所有</p>
+        <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
+        <p>数据更新时间：2026年8月</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
+    <script>
+        (async () => {
+            const result = await requireAuth("admin");
+            if (!result) return;
+            const { data: profile } = await getProfile(result.session.user.id);
+            document.getElementById("userNick").textContent = profile?.nickname || "未设置昵称";
+            document.getElementById("userEmail").textContent = result.session.user.email;
+            const { data, error } = await sb.from("profiles").select("*").order("created_at", { ascending: false });
+            const tbody = document.getElementById("userTable");
+            if (error || !data.length) {
+                tbody.innerHTML = '<tr><td colspan="4" style="color:#9ca3af">暂无数据</td></tr>';
+                return;
+            }
+            tbody.innerHTML = data.map(p => {
+                const roleStyle = p.role === "admin" ? 'class="admin"' : 'class="user"';
+                return `
+                    <tr>
+                        <td>${p.email || "-"}</td>
+                        <td>${p.nickname || "未设置"}</td>
+                        <td><span ${roleStyle}>${p.role}</span></td>
+                        <td>${new Date(p.created_at).toLocaleString("zh-CN")}</td>
+                    </tr>`
+            }).join("");
+        })();
+        async function loadAvatar() {
+            const session = await getSession();
+            const { data: profile } = await getProfile(session.user.id);
+            console.table(profile);
+            if (profile?.avatar_url) {
+                document.getElementById("avatarPreview").src = profile.avatar_url;
+            } else {
+                // 默认头像
+                document.getElementById("avatarPreview").src = "./default-avatar.png";
+                console.log("未设置头像");
+            }
+        }
+        loadAvatar();
+    </script>
+</body>
+
+
+</html>

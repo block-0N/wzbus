@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>龙港客运中心 - 温州县域公交</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+    <link rel="manifest" href="../icons/site.webmanifest">
+    <link rel="stylesheet" href="../styles/busintro.css">
+    <link rel="stylesheet" href="../styles/indexstyle.css">
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+            <a href="../index.html" class="nav-link">首页</a>
+            <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+            <a href="../about.html" class="nav-link">关于我们</a>
+            <a href="../tips.html" class="nav-link">乘车指南</a>
+        </nav>
+    </header>
+    <h1>龙港客运中心</h1>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
+    <!-- 基础信息 + 地理位置 并排卡片 -->
+    <div class="top-row">
+        <div class="card">
+            <h2>基础信息</h2>
+            <table class="info-table">
+                <tr>
+                    <th>站点名称</th>
+                    <td>龙港客运中心</td>
+                </tr>
+                <tr>
+                    <th>站台形式</th>
+                    <td>城市公交发车点（站外候车，露天站点）、<br>县际公交发车点（站内候车，有智能站牌）</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>地理位置</h2>
+            <table class="info-table">
+                <tr>
+                    <th>详细地址</th>
+                    <td><a
+                            href="https://map.baidu.com/poi/%E9%BE%99%E6%B8%AF%E5%AE%A2%E8%BF%90%E4%B8%AD%E5%BF%83/@13419379.485,3175203.63,19z?uid=85b877175866328115764342&ugc_type=3&ugc_ver=1&device_ratio=2&compat=1&routetype=walk&en_uid=85b877175866328115764342&pcevaname=pc4.1&querytype=detailConInfo&da_src=shareurl">
+                            龙港市站港大道与双排街交叉口附近
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>途经道路</th>
+                    <td>站港大道（主干路）</td>
+                </tr>
+                <tr>
+                    <th>附近地标</th>
+                    <td>龙港市人民检察院、龙港客运中心</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- 途经线路 -->
+    <div class="card">
+        <h2>途经线路</h2>
+        <div class="station-flex">
+            <div class="station-col">
+                <table class="station-table">
+                    <thead>
+                        <tr>
+                            <th>线路编号</th>
+                            <th>运行方向</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>龙港公交1路</b></td>
+                            <td>龙港客运中心 - 现代印务港</td>
+                        </tr>
+                        <tr>
+                            <td><b>龙港公交2路</b></td>
+                            <td>龙港客运中心 - 经济产业发展中心</td>
+                        </tr>
+                        <tr>
+                            <td><b>龙港公交5路</b></td>
+                            <td>龙港客运中心 - 青龙湖实验室</td>
+                        </tr>
+                        <tr>
+                            <td><b>龙港公交7路</b></td>
+                            <td>龙港客运中心 - 陈处社区</td>
+                        </tr>
+                        <tr>
+                            <td><b>龙港公交9路</b></td>
+                            <td>龙港客运中心 - 新城华府</td>
+                        </tr>
+                        <tr>
+                            <td><b>龙港公交B1路</b></td>
+                            <td>龙港客运中心 - 政务客厅首末站</td>
+                        </tr>
+                        <tr>
+                            <td><b>龙港公交D01路</b></td>
+                            <td>龙港客运中心 - 青龙湖实验室</td>
+                        </tr>
+                        <tr>
+                            <td><b>龙港-水头班线</b></td>
+                            <td>龙港客运中心 - 水头客运中心</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="station-col">
+                <table class="station-table">
+                    <thead>
+                        <tr>
+                            <th>线路编号</th>
+                            <th>运行方向</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>苍南龙港公交K001路</b></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><b>龙港公交K002路</b></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><b>龙港公交K003路</b></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><b>龙港公交801路</b></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><b>龙港公交802路</b></td>
+                            <td>龙港客运中心 - 括山</td>
+                        </tr>
+                        <tr>
+                            <td><b>龙港公交807路</b></td>
+                            <td>龙港客运中心 - 望里车站</td>
+                        </tr>
+                        <tr>
+                            <td><b>龙港公交808路</b></td>
+                            <td>龙港客运中心 - 炎亭</td>
+                        </tr>
+                        <tr>
+                            <td><b>温州-龙港班线</b></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="top-row">
+        <div class="card">
+            <h2>站点周边配套</h2>
+            <ul class="history">
+                <li><b>交通枢纽</b>：客运中心、出租车停靠点、共享单车停放区</li>
+                <li><b>生活服务</b>：银行网点、药店、便利店、早餐店</li>
+                <li><b>公共设施</b>：公共厕所、休息座椅</li>
+                <li><b>住宅区域</b>：周边密集居民区，出行人流量大</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>换乘建议</h2>
+            <ul class="history">
+                <li><a href="./客运中心西.html"><b>客运中心西</b>：距此300米</a></li>
+                <li><a href="./市交通集团.html"><b>市交通集团</b>：距此300米</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>温州县域公交信息平台 © 2026 版权所有</p>
+        <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
+        <p>数据更新时间：2026年6月</p>
+    </footer>
+
+    <script src="../js/businfo.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/searchinfo.js"></script>
+    <script src="../js/stationinfo.js"></script>
+</body>
+
+</html>

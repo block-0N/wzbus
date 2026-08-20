@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>温州县域公交</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+    <link rel="manifest" href="./icons/site.webmanifest">
+    <link rel="stylesheet" href="./styles/indexstyle.css">
+    <style>
+        .update-tip {
+            background-color: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 10px 15px;
+            margin: 0 auto 20px;
+            width: 400px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+
+        .area-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            list-style: none;
+            margin-top: 20px;
+            flex: 1;
+        }
+
+        .area-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 24px 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 1px solid #e8f4f8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .area-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #3498db;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .area-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            border-color: #3498db;
+        }
+
+        .area-item:hover::before {
+            transform: translateX(0);
+        }
+
+        .area-link {
+            text-decoration: none;
+            color: #2980b9;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            transition: color 0.2s ease;
+        }
+
+        .area-link:hover {
+            color: #1a5f8b;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .area-desc {
+            margin-top: 10px;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .tips-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .tips-list {
+            padding-left: 20px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .tips-list li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .area-list {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .category-title {
+                font-size: 1.1rem;
+            }
+
+            .area-link {
+                font-size: 1.1rem;
+            }
+
+            .area-desc {
+                font-size: 0.85rem;
+                text-indent: 1em;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+
+        </nav>
+    </header>
+
+    <h1>温州县域公交</h1>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
+
+    <div class="update-tip">
+        <strong>更新提示：</strong> <a href="./pages/notice.html" class="nav-link">部分公交班次调整，点此查看。</a>
+    </div>
+
+    <h2>POV视频合集</h2>
+    <ul class="area-list"></ul>
+
+    <h2>路线图合集</h2>
+    <ul class="area-list"></ul>
+
+    <h2>线路概况合集</h2>
+    <ul class="area-list"></ul>
+
+    <h2>站点信息合集</h2>
+    <ul class="area-list">
+        <li class="area-item">
+            <a href="./stations/" class="area-link" rel="noopener noreferrer">
+                主要站点信息合集
+            </a>
+            <p class="area-desc">龙港客运中心、平阳动车站等多个主要站点的信息</p>
+        </li>
+    </ul>
+
+    <h2>市内其他线路</h2>
+    <ul class="area-list">
+        <li class="area-item">
+            <a href="https://wiki.wzbus.net/wiki/首页" class="area-link" target="_blank" rel="noopener noreferrer">
+                瓯越交通百科入口
+            </a>
+            <p class="area-desc">温州市内公交线路的概况</p>
+        </li>
+    </ul>
+
+    <div class="tips-section">
+        <h3 class="tips-title">公交出行小贴士</h3>
+        <ul class="tips-list">
+            <li>龙港/苍南公交支持支付宝、微信乘车码扫码乘车，无需备零钱</li>
+            <li>节假日部分线路会临时调整运营时间，建议出行前确认</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>温州县域公交信息平台 © 2026 版权所有</p>
+        <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
+        <p>数据更新时间：2026年6月</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./auth/auth.js"></script>
+    <script src="./js/businfo.js"></script>
+    <script src="./js/stationinfo.js"></script>
+    <script src="./js/searchinfo.js"></script>
+    <script src="./js/render.js"></script>
+    <script>
+        async function renderAuthNav() {
+            const navBox = document.querySelector('nav');
+            const session = await getSession();
+            let html = `
+                <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+                <a href="./pages/about.html" class="nav-link">关于我们</a>
+                <a href="./pages/tips.html" class="nav-link">乘车指南</a>
+            `;
+
+            if (!session) {
+                html += `
+                    <a href="auth/login.html" class="nav-link">登录</a>
+                    <a href="auth/register.html" class="nav-link">注册</a>
+                `;
+            } else {
+                const { data: profile } = await getProfile(session.user.id);
+                if (profile?.role === 'admin') {
+                    html += `
+                        <a href="auth/admin.html" class="nav-link">管理后台</a>
+                        <a href="auth/editor.html" class="nav-link">信息编辑</a>
+                    `;
+                }
+                html += `
+                    <a href="auth/user.html" class="nav-link">个人中心</a>
+                    <button onclick="logout()" class="nav-link">退出登录</button>
+                `;
+            }
+            navBox.innerHTML = html;
+        }
+        renderAuthNav();
+        sb.auth.onAuthStateChange(() => {
+            renderAuthNav();
+        });
+    </script>
+</body>
+
+</html>

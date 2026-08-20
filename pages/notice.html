@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+    <link rel="manifest" href="../icons/site.webmanifest">
+    <link rel="stylesheet" href="../styles/indexstyle.css">
+    <title>改线公告</title>
+    <style>
+        li p::before {
+            content: '·';
+            font-weight: 800;
+            margin: 0 12px;
+        }
+
+        li p.white::before {
+            color: white;
+        }
+
+        h4 {
+            text-indent: 1em;
+            margin-bottom: 0.85em;
+        }
+
+        figure {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f8f9fc;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        figure a {
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        figure img {
+            max-width: 85%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 6px;
+            border: 1px solid #e4edf5;
+            margin: 0 auto;
+            display: block;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        figcaption {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
+        }
+
+        .double {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3%;
+        }
+
+        @media (max-width:600px) {
+            .double {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="nav-logo">温州县域公交</div>
+        <nav>
+            <a href="../index.html" class="nav-link">首页</a>
+            <a href="https://www.mygolbs.com/home" class="nav-link">实时公交</a>
+            <a href="about.html" class="nav-link">关于我们</a>
+            <a href="tips.html" class="nav-link">乘车指南</a>
+        </nav>
+    </header>
+
+    <h1>改线公告</h1>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="输入公交线路" class="search-input">
+        <button id="search-btn" class="btn" onclick="searchRoute()">搜索</button>
+        <div id="search-result" class="search-result"></div>
+    </div>
+
+    <script src="../js/businfo.js"></script>
+    <script src="../js/stationinfo.js"></script>
+    <script src="../js/searchinfo.js"></script>
+
+    <main>
+        <h2>一、龙港公交</h2>
+        <ul>
+            <li>
+                <h3>2路临时调整</h3>
+                <p>施工路段：沿江路</p>
+                <p>取消站点：礼品城、禁毒协会、江南实验学校、沿江路西三路口、沿江路西一路口、沿江路人民路口、沿江路建新路口、中西医结合医院</p>
+                <p>新增站点：锦港嘉园（往经济产业发展中心）、融媒体中心、、第三中学、龙港书城、银苑大厦、百有市场北、第一中学</p>
+            </li>
+            <li>
+                <h3>A1路临时调整</h3>
+                <p>施工路段：西城路1号桥（西城路513号至西城路529号路段）</p>
+                <p>取消站点：西排农贸市场（招呼站）、万宝路大酒店（招呼站）、示范工业园（招呼站）</p>
+                <p>新增站点：西三路西城路口（往江滨公园）、西排社区</p>
+            </li>
+            <li>
+                <h3>6路、17路、807路临时调整</h3>
+                <p>取消站点：下水门、徐家庄、龙港中学</p>
+                <figure>
+                    <a href="../images/17 807路临时调整.webp">
+                        <img src="../images/17 807路临时调整.webp" alt="6路、17路、807路临时调整">
+                    </a>
+                </figure>
+            </li>
+            <li>
+                <h3>9路、K005路临时调整</h3>
+                <p>取消站点：老台、炉头、环港、浃底、方城浦、友谊社区、潘处、舥艚（山塘文化礼堂）</p>
+                <p>新增站点：老台临时下客点（往新城华府）、新城华府</p>
+            </li>
+            <li>
+                <h3>808路临时调整</h3>
+                <p>取消站点：下水门、徐家庄、龙港中学、梧桥（往炎亭；埭金线站点）、仕家垟（往龙港客运中心）、陈宅、张家堡、陈华垟、东店（往炎亭）、严处（往龙港客运中心）</p>
+                <p>新增站点：御龙湾锦园（往炎亭）、世纪大道西三路口、体育馆（往龙港客运中心）、郭宕、梧桥（龙金大道站点）、薛家桥、文楼、后垟增、宜山大道</p>
+                <figure>
+                    <a href="../images/808路临时调整.png">
+                        <img src="../images/808路临时调整.png" alt="808路临时调整">
+                    </a>
+                </figure>
+            </li>
+            <li>
+                <h3>2路、A2路调整</h3>
+                <figure>
+                    <a href="../images/2、A2调整.webp">
+                        <img src="../images/2、A2调整.webp" alt="2、A2调整">
+                    </a>
+                </figure>
+            </li>
+            <li>
+                <h3>龙港13、806停运，11、16末站互换，A5、A6始发站改至龙港客运中心</h3>
+                <a href="https://mp.weixin.qq.com/s/WvDiFsJuQ5EGMg_r-8ZmaQ">详见此链接</a>
+            </li>
+        </ul>
+
+        <h2>二、苍南公交</h2>
+        <ul>
+            <li>
+                <h3>
+                    <a href="https://mp.weixin.qq.com/s/QIVH10TEz7burnMGC435Hg">111路、117路、119路临时调整</a>
+                </h3>
+                <p>施工路段：灵溪镇江湾路（建兴东路—塘北东路）</p>
+                <p>施工时间：2026年3月22日至2026年8月22日</p>
+                <h4>一、111路公交线路</h4>
+                <p>上行临时走向：江南新区→环城南路→公园路→玉苍路→华侨路→人民大道→车站大道→仁英路→渎浦路→玉苍路→兴园路→成功路→苍南书城</p>
+                <p>下行临时走向：苍南书城→成功路→兴园路→玉苍路→渎浦路→仁英路→车站大道→人民大道→华侨路→河滨路→城中路→玉苍路→公园路→环城南路→江南新区</p>
+                <h4>二、117路公交线路</h4>
+                <p>临时走向：秦岙站→建兴西路→建兴东路→华侨路→仁英路→上江路→站南路→通福路→联进村（往返一致）</p>
+                <h4>三、119路公交线路</h4>
+                <p>临时走向：苍南县社会福利中心→一小路→环城南路→公园路→玉苍路→望鹤路→建兴东路→江湾路→迎福路→车站大道→站南路→沪山新溪村（往返一致）</p>
+                <figure>
+                    <a href="../images/111、117、119路改.webp">
+                        <img src="../images/111、117、119路改.webp" alt="111、117、119路改线示意图" decoding="async" loading="lazy">
+                    </a>
+                    <figcaption>111、117、119路改线示意图</figcaption>
+                </figure>
+            </li>
+            <li>
+                <h3>
+                    <a href="https://mp.weixin.qq.com/s/VP7vEIsvq7ZJBcTD2hATlw">111路调整</a>
+                </h3>
+                <h4>调整路线，由苍南书城调整至余桥社区始发</h4>
+                <p>取消车站：台商小镇、苍南书城</p>
+                <p>新增车站：星海学校、宏利水产、华山村、内李村、余桥社区</p>
+                <figure>
+                    <a href="../images/111.webp">
+                        <img src="../images/111.webp" alt="111路站牌">
+                    </a>
+                    <figcaption>111路站牌</figcaption>
+                </figure>
+            </li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>温州县域公交信息平台 © 2026 版权所有</p>
+        <p>温馨提示：本平台为公益性信息平台，无任何商业运营行为</p>
+        <p>数据更新时间：2026年6月</p>
+    </footer>
+</body>
+
+</html>
