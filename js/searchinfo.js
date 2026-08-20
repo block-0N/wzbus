@@ -65,13 +65,16 @@ function searchRoute() {
             titleDom.innerText = '匹配站点信息';
             titleDom.style.marginLeft = '1em';
             resultContainer.appendChild(titleDom);
-            matchedSites.forEach(siteName => {
+            matchedSites.forEach(site => {
+                const siteName = site.name;
                 const siteItem = document.createElement('div');
                 siteItem.className = 'search-result-item';
                 const siteTitle = highlightKeyword(siteName, keyword);
+                const desc = formatSiteRoutes(site.routes);
                 siteItem.innerHTML = `
                         <div class="item-content">
                             <h4>${siteTitle}</h4>
+                            <div class="result-desc">${desc}</div>
                         </div>
                 `
                 siteItem.onclick = () => {
@@ -86,7 +89,27 @@ function searchRoute() {
         resultContainer.innerHTML = `<div class="no-result">未找到"${keyword}"相关线路或站点，可尝试输入：龙港5路、苍人民路车站</div>`;
     }
 }
-
+/**
+ * 将站点routes对象转为展示字符串
+ * @param {Object} routes - site对象的routes字段 {区域:[线路数组]}
+ * @returns {string} 格式化后的途经线路文本
+ */
+function formatSiteRoutes(routes) {
+    if (!routes || typeof routes !== 'object') {
+        return '途经线路：暂无';
+    }
+    const parts = [];
+    for (const area in routes) {
+        const lineArr = routes[area];
+        if (!Array.isArray(lineArr) || lineArr.length === 0) continue;
+        const lineStr = lineArr.join('、');
+        parts.push(`${area}(${lineStr})`);
+    }
+    if (parts.length === 0) {
+        return '途经线路：暂无';
+    }
+    return `途经线路：${parts.join('，')}`;
+}
 function openUrl(url) {
     window.open(url, '_blank');
     document.getElementById('search-input').value = '';
