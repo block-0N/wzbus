@@ -159,7 +159,7 @@
                 <textarea id="desc" rows="3"
                     placeholder="例如：龙港1路：龙港客运中心 - 现代印务港，途经人民路、世纪大道、新城产业园，覆盖龙港主城区与新城核心产业区"></textarea>
             </div>
-            <div>POV视频BV号：<input id="pov" placeholder="例如：BV1c6U5BAEA6"></div>
+            <div>POV视频BV号：<input id="pov" placeholder="例如：BV1c6U5BAEA6或粘贴链接自动解析，下同"></div>
             <div>路线图标识：<input id="route"
                     placeholder="例如：w:ro8I65aPUwnIQgdCq8PuPtbba8FBXP4xkcGQSzVwksZwUDP8euexq1q01N1meCySvjsA0tSgwicyD4ZE85qGDRw">
             </div>
@@ -242,11 +242,13 @@
 
         // 渲染表格列表
         function renderTable() {
+            console.log('渲染列表中……')
             const wrap = document.getElementById("tableWrap");
             wrap.innerHTML = "";
             const title = document.createElement('h3');
             title.textContent = '已有条目列表';
-            wrap.before(title)
+            const before = wrap.previousElementSibling;
+            if (before.tagName !== 'h3') wrap.before(title);
             busRoutes.forEach(item => {
                 const div = document.createElement("div");
                 div.className = "line-card";
@@ -289,10 +291,29 @@
             document.getElementById("route").value = target.route;
             location.href = "#formTitle";
         }
-
+        /**
+         * 
+         * @param {string} str
+         * @returns {string} 
+         */
+        function GetLink(str) {
+            if (str.includes('%')) str = decodeURIComponent(str);
+            if (str.includes('baidu')) return str.match(/uid=([^&]+)/) ? 'bm:' + str.match(/uid=([^&]+)/)[1] : str;
+            if (str.includes('bilibili')) return str.match(/\/video\/(BV[0-9A-Za-z]{10})/) ? str.match(/\/video\/(BV[0-9A-Za-z]{10})/)[1] : str;
+        }
         // 保存
         async function saveItem() {
             const editId = document.getElementById("editId").value.trim();
+            /**
+             * @typedef Payload
+             * @property {string} name
+             * @property {string} area
+             * @property {string} desc
+             * @property {string} pov
+             * @property {string} route
+             */
+
+            /** @type {Payload} */
             const payload = {
                 name: document.getElementById("name").value.trim(),
                 area: document.getElementById("area").value.trim(),
@@ -300,7 +321,8 @@
                 pov: document.getElementById("pov").value.trim(),
                 route: document.getElementById("route").value.trim()
             };
-
+            if (!payload.route.startsWith('bm') && !payload.route.startsWith('w')) payload.route = GetLink(payload.route);
+            if (!payload.pov.startsWith('BV')) payload.pov = GetLink(payload.pov);
             if (!payload.name || !payload.area) {
                 alert("线路名称、区域不能为空");
                 return;
@@ -324,6 +346,7 @@
             }
 
             alert("保存成功");
+            clearForm();
             loadBusList();
         }
 

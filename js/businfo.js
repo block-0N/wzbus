@@ -9,7 +9,11 @@ const areaToPinyin = {
     "文成": "wencheng",
     "泰顺": "taishun"
 };
-
+/**
+ * 
+ * @param {string} str 
+ * @returns {string}
+ */
 function StringToUrl(str) {
     const baseUrl = {
         "BV": "https://www.bilibili.com/video/",
