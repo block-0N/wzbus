@@ -1,16 +1,16 @@
 {
     "name": "温州县域公交信息平台",
     "short_name": "温州县域公交",
-    "start_url": "/",
-    "scope": "/",
+    "start_url": "./",
+    "scope": "./",
     "icons": [
         {
-            "src": "/icons/android-chrome-192x192.png",
+            "src": "icons/android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/icons/android-chrome-512x512.png",
+            "src": "icons/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
         }

@@ -15,9 +15,10 @@ function renderitem(areaname, type) {
         if (!route.area.includes(areaname)) return console.log(route.area + '不是');
         if ((!route[type] || route[type].includes('404.html')) && type !== 'overview') return;
         if (route.desc.includes('已停运')) return;
+        const url = type === 'overview' ? `https://wiki.wzbus.net/wiki/${route.area}公交${route.name}` : StringToUrl(route[type]);
         const li = document.createElement('li');
         li.className = 'bus-item';
-        li.onclick = () => openUrl(route[type]);
+        li.onclick = () => openUrl(url);
         const a = document.createElement('a');
         a.className = 'bus-link';
         a.textContent = route.area + route.name + typetochar[type];
@@ -26,7 +27,7 @@ function renderitem(areaname, type) {
         console.log(route.area + route.name + '已渲染');
         num++;
     });
-    if (num === 0) console.log("暂无公交线路，快来添加");
+    if (num === 0) console.log("暂无公交线路，快来添加", "color:red;");
     else console.log(`%c渲染了${num}条线路`, "color:green;");
 
 }
