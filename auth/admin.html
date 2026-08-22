@@ -118,6 +118,10 @@
                 <tbody id="userTable"></tbody>
             </table>
         </article>
+        <article>
+            <h2>反馈管理后台</h2>
+            <div id="adminFeedbackList"></div>
+        </article>
     </main>
 
 
@@ -166,6 +170,82 @@
             }
         }
         loadAvatar();
+    </script>
+    <script>
+        let adminUid = null;
+
+        (async function init() {
+            const { data: { user } } = await sb.auth.getUser();
+            if (!user) window.location.href = "login.html";
+            adminUid = user.id;
+            renderAllFeedback();
+        })();
+
+        async function renderAllFeedback() {
+            const { data: list, error } = await sb.from("feedback")
+                .select("*,feedback_comment(*)")
+                .order("created_at", { asc: false });
+            if (error) return console.error(error);
+
+            const box = document.getElementById("adminFeedbackList");
+            box.innerHTML = "";
+            list.forEach(fb => {
+                const stMap = { pending: "待处理", processing: "处理中", done: "已完成" };
+                let commentHtml = "";
+                fb.feedback_comment.forEach(c => {
+                    commentHtml += `<div style="background:#eee;padding:4px;margin:2px 0;">${c.comment} <small>${new Date(c.created_at).toLocaleString()}</small></div>`;
+                })
+
+                const itemHtml = `
+                    <div style="border:1px solid #999;padding:12px;margin:10px 0;">
+                        <h4>${fb.title} — ${stMap[fb.status]}</h4>
+                        <div>${fb.content}</div>
+                        <div><small>用户ID:${fb.user_id} ${new Date(fb.created_at).toLocaleString()}</small></div>
+
+                        <div>
+                            <label>修改状态：</label>
+                            <select data-fbid="${fb.id}" class="statusSel">
+                                <option value="pending" ${fb.status === 'pending' ? 'selected' : ''}>待处理</option>
+                                <option value="processing" ${fb.status === 'processing' ? 'selected' : ''}>处理中</option>
+                                <option value="done" ${fb.status === 'done' ? 'selected' : ''}>已完成</option>
+                            </select>
+                        </div>
+
+                        <div>已有回复：${commentHtml || "<i>暂无回复</i>"}</div>
+                        <div style="margin-top:6px;">
+                            <textarea class="comInput" data-fbid="${fb.id}" placeholder="输入管理员评论"></textarea>
+                            <button class="comBtn" data-fbid="${fb.id}">提交回复</button>
+                        </div>
+                    </div>`;
+                box.innerHTML += itemHtml;
+            })
+
+            // 绑定修改状态
+            document.querySelectorAll(".statusSel").forEach(el => {
+                el.onchange = async function () {
+                    const fbid = this.dataset.fbid;
+                    const status = this.value;
+                    await sb.from("feedback").update({ status }).eq("id", fbid);
+                    renderAllFeedback();
+                }
+            })
+
+            // 绑定提交评论
+            document.querySelectorAll(".comBtn").forEach(btn => {
+                btn.onclick = async function () {
+                    const fbid = this.dataset.fbid;
+                    const textarea = document.querySelector(`.comInput[data-fbid="${fbid}"]`);
+                    const comment = textarea.value.trim();
+                    if (!comment) return;
+                    await sb.from("feedback_comment").insert({
+                        feedback_id: fbid,
+                        admin_id: adminUid,
+                        comment
+                    });
+                    renderAllFeedback();
+                }
+            })
+        }
     </script>
 </body>
 

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>意见反馈</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="auth-wrap">
+        <div class="auth-card">
+            <h2>提交反馈</h2>
+            <div id="msg"></div>
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label>标题</label>
+                    <input type="text" id="fbTitle" required autocomplete="off" placeholder="简单描述问题">
+                </div>
+                <div class="form-group">
+                    <label>详细描述</label>
+                    <textarea id="fbContent" required rows="5" placeholder="写下你的建议或问题"></textarea>
+                </div>
+                <button type="submit" class="btn">提交反馈</button>
+            </form>
+
+            <hr>
+            <h3>我的反馈记录</h3>
+            <div id="myFeedbackList"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
+    <script>
+        let currentUser = null;
+
+        // 鉴权，未登录跳登录页
+        (async function init() {
+            const { data: { user } } = await sb.auth.getUser();
+            if (!user) {
+                window.location.href = "login.html";
+                return;
+            }
+            currentUser = user;
+            renderMyFeedback();
+        })();
+
+        // 提交反馈
+        document.getElementById("feedbackForm").addEventListener("submit", async e => {
+            e.preventDefault();
+            const title = document.getElementById("fbTitle").value.trim();
+            const content = document.getElementById("fbContent").value.trim();
+            const msgBox = document.getElementById("msg");
+
+            const { error } = await sb.from("feedback").insert({
+                user_id: currentUser.id,
+                title,
+                content
+            });
+            if (error) {
+                msgBox.innerText = "提交失败：" + error.message;
+                return;
+            }
+            msgBox.innerText = "提交成功！";
+            document.getElementById("feedbackForm").reset();
+            renderMyFeedback();
+        });
+
+        // 渲染自己的反馈 + 管理员评论
+        async function renderMyFeedback() {
+            const { data: list, error } = await sb.from("feedback")
+                .select("*,feedback_comment(*)")
+                .order("created_at", { asc: false });
+            if (error) return console.error(error);
+
+            const box = document.getElementById("myFeedbackList");
+            box.innerHTML = "";
+            if (list.length === 0) {
+                box.innerHTML = "<p>暂无反馈记录</p>";
+                return;
+            }
+
+            list.forEach(item => {
+                let statusText = { pending: "待处理", processing: "处理中", done: "已完成" }[item.status];
+                let html = `
+                    <div style="border:1px solid #ccc;padding:10px;margin:8px 0;border-radius:6px;">
+                        <div><strong>${item.title}</strong> <span>[${statusText}]</span></div>
+                        <div>${item.content}</div>
+                    <div><small>${new Date(item.created_at).toLocaleString()}</small></div>
+                `;
+                // 显示管理员回复
+                if (item.feedback_comment && item.feedback_comment.length > 0) {
+                    html += `
+                        <div style="background:#f5f5f5;padding:8px;margin-top:6px;">
+                            <b>管理员回复：</b>
+                    `;
+                    item.feedback_comment.forEach(c => {
+                        html += `<div>${c.comment}<br><small>${new Date(c.created_at).toLocaleString()}</small></div>`;
+                    })
+                    html += `</div>`;
+                }
+                html += `</div>`;
+                box.innerHTML += html;
+            })
+        }
+    </script>
+</body>
+
+</html>
