@@ -1,8 +1,8 @@
 {
     "name": "温州县域公交信息平台",
     "short_name": "温州县域公交",
-    "start_url": "./",
-    "scope": "./",
+    "start_url": "/wzbus/",
+    "scope": "/wzbus/",
     "icons": [
         {
             "src": "icons/android-chrome-192x192.png",
