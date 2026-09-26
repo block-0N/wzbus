@@ -1,4 +1,4 @@
-li {
+﻿li {
     position: relative;
     display: inline-block;
     padding-left: 18px;
@@ -27,8 +27,21 @@ main>h2 {
     border: 0;
 }
 
-.btn {
+main > .btn {
     position: static;
+    display: inline-block;
     text-decoration: none;
     margin: 12px 30px;
+    padding: 12px 30px;
+    border-radius: 6px;
+    background: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+main > .btn:hover {
+    background: #2980b9;
 }
