@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -40,10 +40,10 @@
     <script src="../js/stationinfo.js"></script>
     <script src="../js/searchinfo.js"></script>
     <script>
-        const base = '../stations/';
+        const base = './';
         const listDom = document.getElementById('bus-list');
         listDom.innerHTML = '';
-        const files = siteNames.sort((a, b) => a.localeCompare(b, 'zh-CN')).map(name => name + '.html');
+        const files = [...siteNames].sort((a, b) => a.name.localeCompare(b.name, 'zh-CN')).map(item => item.name + '.html');
         files.forEach(f => {
             const li = document.createElement('li');
             li.className = 'bus-item';

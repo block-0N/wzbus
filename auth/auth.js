@@ -1,6 +1,10 @@
 const SUPABASE_URL = "https://iaocxpqpbyztiqpcomiv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_pEVd5y5gB05gb7C-yAlUzg_e4s6bizJ";
-
+const APP_BASE = (() => {
+    if (!/\.github\.io$/i.test(location.hostname)) return '';
+    const seg = location.pathname.split('/').filter(Boolean);
+    return seg.length ? '/' + seg[0] : '';
+})();
 // 只初始化一次，不要覆盖混淆
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     auth: {
@@ -44,7 +48,7 @@ async function login(email, password) {
  */
 async function logout() {
     await sb.auth.signOut();
-    window.location.href = "./auth/login.html";
+    window.location.href = APP_BASE + "/auth/login.html";
 }
 
 /**
@@ -78,19 +82,19 @@ async function getProfile(userId) {
 async function requireAuth(requiredRole = null) {
     const session = await getSession();
     if (!session) {
-        window.location.href = "login.html";
+        window.location.href = APP_BASE + "/auth/login.html"
         return null;
     }
 
     const { data: profile, error } = await getProfile(session.user.id);
     if (error || !profile) {
-        window.location.href = "login.html";
+        window.location.href = APP_BASE + "/auth/login.html"
         return null;
     }
 
     if (requiredRole && profile.role !== requiredRole) {
         alert("权限不足");
-        window.location.href = "../index.html";
+        window.location.href = APP_BASE + "/index.html"
         return null;
     }
 
@@ -103,7 +107,7 @@ sb.auth.onAuthStateChange((event, session) => {
         const filename = window.location.pathname.split("/").pop();
         const publicPages = ["login.html", "register.html", "", "index.html"];
         if (!publicPages.includes(filename)) {
-            window.location.href = "login.html";
+            window.location.href = APP_BASE + "/auth/login.html"
         }
     }
 });
