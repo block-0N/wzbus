@@ -12,172 +12,347 @@
     <link rel="stylesheet" href="../styles/indexstyle.css">
     <link rel="stylesheet" href="../styles/auth.css">
     <style>
-        div { margin: 12px 0; font-size: 15px; color: #333; word-break: break-all; }
-        article input, article textarea {
-            border: 1px solid #e0e6ed; border-radius: 6px; padding: 9px 12px;
-            font-size: 14px; outline: none; background: #ffffff;
-            transition: all 0.24s ease; width: 100%;
-        }
-        textarea { resize: vertical; line-height: 1.5; }
-        article input:focus, article textarea:focus {
-            border-color: #3498db; box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.18);
-        }
-        article input:hover, article textarea:hover { border-color: #2980b9; }
-        #editId { display: none; }
-        button { display: inline-block; }
-        .btg { display: flex; gap: 8px; }
-        .btg .btn {
-            position: static !important; right: auto; top: auto;
-            transform: none; flex-shrink: 0;
-        }
-        .arb {
-            margin: 6px 0; padding: 12px; border: 1px solid #e0e6ed;
-            border-radius: 8px; transition: 0.2s ease;
-        }
-        .arb:hover { border-color: #3498db; box-shadow: 0 2px 6px rgba(52, 152, 219, 0.1); }
-        .arb > div:nth-child(1) { display: flex; align-items: center; gap: 8px; }
-        .arb > div:nth-child(2) { margin: 8px 0; }
-        .arb > div:nth-child(2) > span {
-            display: inline-block; margin: 3px 4px; padding: 3px 8px;
-            background-color: #e8f4fd; border-radius: 16px; font-size: 13px;
-        }
-        .arb > div:nth-child(2) > span > button {
-            margin-left: 6px; padding: 1px 6px; font-size: 12px;
-            border-radius: 50%; background-color: #e0e6ed; color: #333;
-        }
-        .arb > div:nth-child(2) > span > button:hover { background-color: #cbd5e0; }
-        .arb > div:nth-child(3) { display: flex; align-items: center; gap: 8px; }
-        .arb > div:nth-child(3) > input { flex: 1; }
-
-        /* ============ 文件资源管理器布局 ============ */
-        .admin-layout {
-            display: flex;
-            gap: 0;
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-            min-height: 60vh;
+        body {
+            background: #f4f7fa;
         }
 
-        /* ---- 左侧导航 ---- */
-        .sidebar {
-            flex: 0 0 220px;
-            background: #f7f9fc;
+        /* ---- 通用控件 ---- */
+        div {
+            margin: 12px 0;
+            font-size: 15px;
+            color: #333;
+            word-break: break-all;
+        }
+
+        article input,
+        article textarea {
             border: 1px solid #e0e6ed;
-            border-radius: 12px 0 0 12px;
-            padding: 16px 8px;
-            border-right: none;
+            border-radius: 6px;
+            padding: 9px 12px;
+            font-size: 14px;
+            outline: none;
+            background: #fff;
+            transition: all 0.24s ease;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        .sidebar-group { margin-bottom: 18px; }
-        .sidebar-group:last-child { margin-bottom: 0; }
-
-        .sidebar-group-title {
-            font-size: 12px;
-            font-weight: 600;
-            color: #7a8699;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 0 12px 8px;
-            margin: 0;
+        textarea {
+            resize: vertical;
+            line-height: 1.5;
         }
 
-        .sidebar-item {
+        article input:focus,
+        article textarea:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.18);
+        }
+
+        article input:hover,
+        article textarea:hover {
+            border-color: #2980b9;
+        }
+
+        #editId,
+        #stationEditId,
+        #stationRoutesRaw {
+            display: none;
+        }
+
+        .btg {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btg .btn {
+            position: static !important;
+            right: auto;
+            top: auto;
+            transform: none;
+            flex-shrink: 0;
+        }
+
+        /* ---- 卡片列表里的线路/站点项 ---- */
+        .line-card {
+            background: #fff;
+            border: 1px solid #e0e6ed;
+            border-radius: 10px;
+            padding: 16px 18px;
+            margin: 12px 0;
+            transition: 0.2s ease;
+        }
+
+        .line-card:hover {
+            border-color: #3498db;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.08);
+        }
+
+        .line-card h4 {
+            margin: 0 0 8px;
+            color: #2980b9;
+        }
+
+        .line-card>div {
+            margin: 6px 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* ---- 站点区域编辑器 ---- */
+        .arb {
+            margin: 6px 0;
+            padding: 12px;
+            border: 1px solid #e0e6ed;
+            border-radius: 8px;
+            transition: 0.2s ease;
+            background: #fff;
+        }
+
+        .arb:hover {
+            border-color: #3498db;
+            box-shadow: 0 2px 6px rgba(52, 152, 219, 0.1);
+        }
+
+        .arb>div:nth-child(1) {
             display: flex;
             align-items: center;
             gap: 8px;
-            width: 100%;
-            padding: 10px 12px;
-            border: none;
-            background: transparent;
-            border-radius: 8px;
+        }
+
+        .arb>div:nth-child(2) {
+            margin: 8px 0;
+        }
+
+        .arb>div:nth-child(2)>span {
+            display: inline-block;
+            margin: 3px 4px;
+            padding: 3px 8px;
+            background-color: #e8f4fd;
+            border-radius: 16px;
+            font-size: 13px;
+        }
+
+        .arb>div:nth-child(2)>span>button {
+            margin-left: 6px;
+            padding: 1px 6px;
+            font-size: 12px;
+            border-radius: 50%;
+            background-color: #e0e6ed;
+            color: #333;
             cursor: pointer;
-            font-size: 14px;
-            color: #444;
-            text-align: left;
-            transition: all 0.15s ease;
-            font-family: inherit;
-            margin-bottom: 2px;
+            border: none;
         }
 
-        .sidebar-item:hover {
-            background: #e8f4fd;
-            color: #2980b9;
+        .arb>div:nth-child(2)>span>button:hover {
+            background-color: #cbd5e0;
         }
 
-        .sidebar-item.active {
-            background: #3498db;
-            color: #fff;
-            font-weight: 500;
-            box-shadow: 0 2px 6px rgba(52, 152, 219, 0.25);
+        .arb>div:nth-child(3) {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* ---- 右侧内容 ---- */
-        .content {
+        .arb>div:nth-child(3)>input {
             flex: 1;
+        }
+
+        /* ================================================
+           页面容器 + hash 路由
+           ================================================ */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page-wrap {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 24px 20px 60px;
+        }
+
+        /* ---- 面包屑 ---- */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            font-size: 14px;
+            color: #7a8699;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background 0.15s;
+        }
+
+        .breadcrumb a:hover {
+            background: #e8f4fd;
+        }
+
+        .breadcrumb .sep {
+            color: #cbd5e0;
+            user-select: none;
+        }
+
+        .breadcrumb .current {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        /* ---- 首页 ---- */
+        .home-hero {
+            text-align: center;
+            padding: 24px 0 32px;
+        }
+
+        .home-hero h1 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin: 0 0 8px;
+        }
+
+        .home-hero p {
+            color: #7a8699;
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .group {
+            margin-bottom: 32px;
+        }
+
+        .group-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #555;
+            margin: 0 0 12px;
+            padding-left: 4px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 26px 16px;
             background: #fff;
             border: 1px solid #e0e6ed;
-            border-radius: 0 12px 12px 0;
-            padding: 20px 24px;
-            min-height: 400px;
-            min-width: 0;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
 
-        .content-panel { display: none; }
-        .content-panel.active { display: block; }
-
-        .content h2 {
-            margin-top: 0;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #eef2f7;
+        .card:hover {
+            border-color: #3498db;
             color: #2980b9;
-            font-size: 18px;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(52, 152, 219, 0.14);
         }
 
-        .content h3 {
-            margin-top: 0;
+        .card-icon {
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        /* ---- 内容页 ---- */
+        .content-card {
+            background: #fff;
+            border: 1px solid #e0e6ed;
+            border-radius: 12px;
+            padding: 24px 26px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .content-card h2 {
+            margin: 0 0 20px;
+            color: #2c3e50;
+            font-size: 1.35rem;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #eef2f7;
+        }
+
+        .content-card h3 {
+            margin: 0 0 14px;
             color: #555;
             font-size: 15px;
             font-weight: 500;
         }
 
-        /* ---- 移动端 ---- */
-        @media (max-width: 720px) {
-            .admin-layout {
-                flex-direction: column;
-                padding: 0 12px;
+        .content-card h4 {
+            margin: 16px 0 8px;
+            color: #555;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        button:not(.card):not(.sidebar-item):not(.arb button) {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 9px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+
+        button:not(.card):hover {
+            background: #2980b9;
+        }
+
+        /* ---- 响应式 ---- */
+        @media (max-width: 700px) {
+            .page-wrap {
+                padding: 16px 14px 40px;
             }
-            .sidebar {
-                flex: 0 0 auto;
-                border-radius: 12px 12px 0 0;
-                border-right: 1px solid #e0e6ed;
-                border-bottom: none;
-                display: flex;
-                overflow-x: auto;
-                padding: 8px;
-                gap: 6px;
-                scrollbar-width: thin;
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
             }
-            .sidebar-group {
-                display: flex;
-                align-items: center;
-                gap: 6px;
-                margin-bottom: 0;
-                flex-shrink: 0;
+
+            .card {
+                flex-direction: row;
+                justify-content: flex-start;
+                padding: 18px 20px;
             }
-            .sidebar-group-title {
-                padding: 0 6px 0 0;
-                white-space: nowrap;
+
+            .card-icon {
+                font-size: 22px;
             }
-            .sidebar-item {
-                width: auto;
-                white-space: nowrap;
-                padding: 8px 12px;
-                margin-bottom: 0;
+
+            .content-card {
+                padding: 18px 16px;
             }
-            .content {
-                border-radius: 0 0 12px 12px;
-                padding: 16px;
+
+            .home-hero h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -194,32 +369,69 @@
         </nav>
     </header>
 
-    <h1>管理后台</h1>
+    <div class="page-wrap">
 
-    <div class="admin-layout">
-        <!-- ==================== 左侧导航 ==================== -->
-        <aside class="sidebar">
-            <div class="sidebar-group">
-                <div class="sidebar-group-title">🚌 公交线路</div>
-                <button class="sidebar-item active" data-panel="route-add">📝 新增 / 编辑</button>
-                <button class="sidebar-item" data-panel="route-import">📥 批量导入</button>
-                <button class="sidebar-item" data-panel="route-list">📋 已有列表</button>
+        <!-- ==========================================
+             首页：大标题 + 子功能卡片
+             ========================================== -->
+        <section class="page active" data-route="/">
+            <div class="home-hero">
+                <h1>管理后台</h1>
+                <p>选择一个功能开始操作</p>
             </div>
-            <div class="sidebar-group">
-                <div class="sidebar-group-title">🚏 公交站点</div>
-                <button class="sidebar-item" data-panel="station-add">📝 新增 / 编辑</button>
-                <button class="sidebar-item" data-panel="station-import">📥 批量导入</button>
-                <button class="sidebar-item" data-panel="station-list">📋 已有列表</button>
+
+            <div class="group">
+                <h3 class="group-title">🚌 公交线路</h3>
+                <div class="card-grid">
+                    <a href="#/routes/add" class="card">
+                        <span class="card-icon">📝</span>
+                        <span>新增 / 编辑</span>
+                    </a>
+                    <a href="#/routes/import" class="card">
+                        <span class="card-icon">📥</span>
+                        <span>批量导入</span>
+                    </a>
+                    <a href="#/routes/list" class="card">
+                        <span class="card-icon">📋</span>
+                        <span>已有列表</span>
+                    </a>
+                </div>
             </div>
-        </aside>
 
-        <!-- ==================== 右侧内容 ==================== -->
-        <main class="content">
+            <div class="group">
+                <h3 class="group-title">🚏 公交站点</h3>
+                <div class="card-grid">
+                    <a href="#/stations/add" class="card">
+                        <span class="card-icon">📝</span>
+                        <span>新增 / 编辑</span>
+                    </a>
+                    <a href="#/stations/import" class="card">
+                        <span class="card-icon">📥</span>
+                        <span>批量导入</span>
+                    </a>
+                    <a href="#/stations/list" class="card">
+                        <span class="card-icon">📋</span>
+                        <span>已有列表</span>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-            <!-- 线路：新增/编辑 -->
-            <section id="panel-route-add" class="content-panel active">
-                <h2>公交线路 · 新增 / 编辑</h2>
-                <h3 id="formTitle">新增线路</h3>
+
+        <!-- ==========================================
+             线路 · 新增/编辑
+             ========================================== -->
+        <section class="page" data-route="/routes/add">
+            <nav class="breadcrumb">
+                <a href="#/">管理后台</a>
+                <span class="sep">›</span>
+                <a href="#/routes/list">公交线路</a>
+                <span class="sep">›</span>
+                <span class="current" id="formCrumb">新增</span>
+            </nav>
+
+            <div class="content-card">
+                <h2 id="formTitle">新增线路</h2>
                 <article>
                     <input type="hidden" id="editId">
                     <div>线路名称：<input id="name" placeholder="例如：1路"></div>
@@ -237,63 +449,127 @@
                         <button onclick="clearForm()">清空</button>
                     </div>
                 </article>
-            </section>
+            </div>
+        </section>
 
-            <!-- 线路：批量导入 -->
-            <section id="panel-route-import" class="content-panel">
-                <h2>公交线路 · 批量导入</h2>
+
+        <!-- ==========================================
+             线路 · 批量导入
+             ========================================== -->
+        <section class="page" data-route="/routes/import">
+            <nav class="breadcrumb">
+                <a href="#/">管理后台</a>
+                <span class="sep">›</span>
+                <a href="#/routes/list">公交线路</a>
+                <span class="sep">›</span>
+                <span class="current">批量导入</span>
+            </nav>
+
+            <div class="content-card">
+                <h2>批量导入线路</h2>
                 <article>
                     <div>粘贴完整的 JSON 数组（每项包含 name / area / desc / pov / route）：</div>
                     <textarea id="importJsonBox" rows="12" placeholder="粘贴完整 [] 数组"></textarea>
-                    <button onclick="batchImport()">导入</button>
+                    <div style="margin-top:12px;">
+                        <button onclick="batchImport()">导入</button>
+                    </div>
                 </article>
-            </section>
+            </div>
+        </section>
 
-            <!-- 线路：列表 -->
-            <section id="panel-route-list" class="content-panel">
+
+        <!-- ==========================================
+             线路 · 已有列表
+             ========================================== -->
+        <section class="page" data-route="/routes/list">
+            <nav class="breadcrumb">
+                <a href="#/">管理后台</a>
+                <span class="sep">›</span>
+                <span class="current">公交线路 · 已有列表</span>
+            </nav>
+
+            <div class="content-card">
                 <h2>公交线路 · 已有列表</h2>
                 <article id="tableWrap"></article>
-            </section>
+            </div>
+        </section>
 
-            <!-- 站点：新增/编辑 -->
-            <section id="panel-station-add" class="content-panel">
-                <h2>公交站点 · 新增 / 编辑</h2>
-                <h3 id="stationFormTitle">新增站点</h3>
+
+        <!-- ==========================================
+             站点 · 新增/编辑
+             ========================================== -->
+        <section class="page" data-route="/stations/add">
+            <nav class="breadcrumb">
+                <a href="#/">管理后台</a>
+                <span class="sep">›</span>
+                <a href="#/stations/list">公交站点</a>
+                <span class="sep">›</span>
+                <span class="current" id="stationFormCrumb">新增</span>
+            </nav>
+
+            <div class="content-card">
+                <h2 id="stationFormTitle">新增站点</h2>
                 <article>
                     <input type="hidden" id="stationEditId">
                     <div>站点名称：<input id="stationName" placeholder="例如：龙港客运中心"></div>
-                    <h4>区域&线路可视化编辑</h4>
-                    新增区域：
+                    <h4>区域 & 线路可视化编辑</h4>
+                    <div>新增区域：</div>
                     <div class="btg">
-                        <input id="newAreaInput" placeholder="龙港 / 苍南">
-                        <button onclick="addNewArea()" class="btn">添加</button>
+                        <input id="newAreaInput" placeholder="龙港 / 苍南" style="flex:1;">
+                        <button onclick="addNewArea()">添加</button>
                     </div>
                     <div id="areaListWrap"></div>
-                    <div class="btg">
+                    <div class="btg" style="margin-top:16px;">
                         <button onclick="saveStation()">保存</button>
                         <button onclick="clearStationForm()">取消</button>
                     </div>
                     <input type="hidden" id="stationRoutesRaw">
                 </article>
-            </section>
+            </div>
+        </section>
 
-            <!-- 站点：批量导入 -->
-            <section id="panel-station-import" class="content-panel">
-                <h2>公交站点 · 批量导入</h2>
+
+        <!-- ==========================================
+             站点 · 批量导入
+             ========================================== -->
+        <section class="page" data-route="/stations/import">
+            <nav class="breadcrumb">
+                <a href="#/">管理后台</a>
+                <span class="sep">›</span>
+                <a href="#/stations/list">公交站点</a>
+                <span class="sep">›</span>
+                <span class="current">批量导入</span>
+            </nav>
+
+            <div class="content-card">
+                <h2>批量导入站点</h2>
                 <article>
                     <div>粘贴完整的 JSON 数组（每项包含 name / routes）：</div>
                     <textarea id="stationImportBox" rows="12" placeholder="粘贴完整 [] 数组"></textarea>
-                    <button onclick="batchImportStation()">导入</button>
+                    <div style="margin-top:12px;">
+                        <button onclick="batchImportStation()">导入</button>
+                    </div>
                 </article>
-            </section>
+            </div>
+        </section>
 
-            <!-- 站点：列表 -->
-            <section id="panel-station-list" class="content-panel">
+
+        <!-- ==========================================
+             站点 · 已有列表
+             ========================================== -->
+        <section class="page" data-route="/stations/list">
+            <nav class="breadcrumb">
+                <a href="#/">管理后台</a>
+                <span class="sep">›</span>
+                <span class="current">公交站点 · 已有列表</span>
+            </nav>
+
+            <div class="content-card">
                 <h2>公交站点 · 已有列表</h2>
                 <article id="stationTableWrap"></article>
-            </section>
+            </div>
+        </section>
 
-        </main>
     </div>
 
     <footer>
@@ -305,21 +581,26 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="auth.js"></script>
     <script>
-        // ============ 面板切换 ============
-        function switchPanel(name) {
-            document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
-            const btn = document.querySelector(`.sidebar-item[data-panel="${name}"]`);
-            const panel = document.getElementById('panel-' + name);
-            if (btn) btn.classList.add('active');
-            if (panel) panel.classList.add('active');
+        // ============================================================
+        // Hash 路由
+        // ============================================================
+        function applyRoute() {
+            const hash = location.hash.replace(/^#/, '') || '/';
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const target = document.querySelector(`.page[data-route="${hash}"]`);
+            if (target) {
+                target.classList.add('active');
+            } else {
+                document.querySelector('.page[data-route="/"]').classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        window.addEventListener('hashchange', applyRoute);
+        window.addEventListener('DOMContentLoaded', applyRoute);
 
-        document.querySelectorAll('.sidebar-item').forEach(btn => {
-            btn.addEventListener('click', () => switchPanel(btn.dataset.panel));
-        });
-
-        // ============ 业务代码 ============
+        // ============================================================
+        // 业务逻辑（未改动）
+        // ============================================================
         let busRoutes = [];
 
         (async function init() {
@@ -344,14 +625,18 @@
         function renderTable() {
             const wrap = document.getElementById("tableWrap");
             wrap.innerHTML = "";
+            if (busRoutes.length === 0) {
+                wrap.innerHTML = "<div style='text-align:center;color:#999;padding:20px;'>暂无线路数据</div>";
+                return;
+            }
             busRoutes.forEach(item => {
                 const div = document.createElement("div");
                 div.className = "line-card";
                 div.innerHTML = `
                     <h4>${item.area}${item.name}</h4>
-                    <div>${item.desc}</div>
-                    <div>POV:${item.pov}</div>
-                    <div>Route:${item.route}</div>
+                    <div>${item.desc || ''}</div>
+                    <div>POV：${item.pov || '—'}</div>
+                    <div>Route：${item.route || '—'}</div>
                     <div class="btg">
                         <button onclick="openEditForm('${item.id}')">编辑</button>
                         <button onclick="deleteItem('${item.id}')">删除</button>
@@ -363,6 +648,7 @@
 
         function clearForm() {
             document.getElementById("formTitle").innerText = "新增线路";
+            document.getElementById("formCrumb").innerText = "新增";
             document.getElementById("editId").value = "";
             document.getElementById("name").value = "";
             document.getElementById("area").value = "";
@@ -374,14 +660,15 @@
         function openEditForm(uuid) {
             const target = busRoutes.find(r => r.id === uuid);
             if (!target) return;
-            switchPanel('route-add');            // ← 自动切到编辑面板
+            location.hash = '#/routes/add';    // 切到编辑面板
             document.getElementById("formTitle").innerText = "编辑线路";
+            document.getElementById("formCrumb").innerText = "编辑";
             document.getElementById("editId").value = target.id;
             document.getElementById("name").value = target.name;
             document.getElementById("area").value = target.area;
-            document.getElementById("desc").value = target.desc;
-            document.getElementById("pov").value = target.pov;
-            document.getElementById("route").value = target.route;
+            document.getElementById("desc").value = target.desc || '';
+            document.getElementById("pov").value = target.pov || '';
+            document.getElementById("route").value = target.route || '';
         }
 
         function GetLink(str) {
@@ -414,7 +701,8 @@
             if (error) { console.error(error); alert("保存失败：" + error.message); return; }
             alert("保存成功");
             clearForm();
-            loadBusList();
+            await loadBusList();
+            location.hash = '#/routes/list';   // 保存后回列表
         }
 
         async function deleteItem(uuid) {
@@ -436,10 +724,14 @@
             else {
                 alert(`成功导入${list.length}条线路！`);
                 document.getElementById("importJsonBox").value = "";
-                loadBusList();
+                await loadBusList();
+                location.hash = '#/routes/list';
             }
         }
 
+        // ============================================================
+        // 站点
+        // ============================================================
         let stationList = [];
         let editRoutes = {};
 
@@ -453,13 +745,17 @@
         function renderStationTable() {
             const wrap = document.getElementById("stationTableWrap");
             wrap.innerHTML = "";
+            if (stationList.length === 0) {
+                wrap.innerHTML = "<div style='text-align:center;color:#999;padding:20px;'>暂无站点数据</div>";
+                return;
+            }
             stationList.forEach(item => {
                 const div = document.createElement("div");
                 div.className = "line-card";
                 const routesText = JSON.stringify(item.routes, null, 1);
                 div.innerHTML = `
                     <h4>${item.name}</h4>
-                    <p>${routesText}</p>
+                    <pre style="font-size:12px;color:#777;background:#f7f9fc;padding:8px;border-radius:6px;overflow:auto;">${routesText}</pre>
                     <div class="btg">
                         <button onclick="openEditStationForm('${item.id}')">编辑</button>
                         <button onclick="deleteStation('${item.id}')">删除</button>
@@ -472,8 +768,9 @@
         function openEditStationForm(uuid) {
             const target = stationList.find(s => s.id === uuid);
             if (!target) return;
-            switchPanel('station-add');          // ← 自动切到编辑面板
+            location.hash = '#/stations/add';   // 切到编辑面板
             document.getElementById("stationFormTitle").innerText = "编辑站点";
+            document.getElementById("stationFormCrumb").innerText = "编辑";
             document.getElementById("stationEditId").value = target.id;
             document.getElementById("stationName").value = target.name;
             editRoutes = JSON.parse(JSON.stringify(target.routes));
@@ -482,9 +779,11 @@
 
         function clearStationForm() {
             document.getElementById("stationFormTitle").innerText = "新增站点";
+            document.getElementById("stationFormCrumb").innerText = "新增";
             document.getElementById("stationEditId").value = "";
             document.getElementById("stationName").value = "";
             document.getElementById("areaListWrap").innerHTML = "";
+            editRoutes = {};
         }
 
         function renderAreaEditor() {
@@ -492,7 +791,7 @@
             wrap.innerHTML = "";
             const areaNames = Object.keys(editRoutes);
             if (areaNames.length === 0) {
-                wrap.innerHTML = "<div>暂无区域，请添加区域</div>";
+                wrap.innerHTML = "<div style='color:#999;padding:12px 0;'>暂无区域，请先添加区域</div>";
                 return;
             }
             areaNames.forEach(area => {
@@ -508,7 +807,7 @@
                     <strong>${area}</strong>
                     <button onclick="removeArea('${area}')">删除该区域</button>
                 </div>
-                <div>${routeHtml}</div>
+                <div>${routeHtml || '<span style="color:#999;font-size:13px;">暂无线路</span>'}</div>
                 <div>
                     新增线路：<input data-area="${area}" placeholder="1路">
                     <button onclick="addRouteToArea('${area}')">添加</button>
@@ -561,7 +860,8 @@
             if (error) { alert("保存失败：" + error.message); console.error(error); return; }
             alert("保存成功");
             clearStationForm();
-            loadStationListAdmin();
+            await loadStationListAdmin();
+            location.hash = '#/stations/list';
         }
 
         async function deleteStation(uuid) {
@@ -583,7 +883,8 @@
             else {
                 alert(`成功导入${list.length}个站点`);
                 document.getElementById("stationImportBox").value = "";
-                loadStationListAdmin();
+                await loadStationListAdmin();
+                location.hash = '#/stations/list';
             }
         }
     </script>
