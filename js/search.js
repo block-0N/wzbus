@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.querySelectorAll('.station-table tbody tr').forEach(tr => {
         const routeName = tr.querySelector('td b').textContent.trim();
-        const route = busRoutes.find(item => item.area + '公交' + item.name == routeName);
+        const route = busRoutes.find(item => item.area + '公交' + item.name === routeName);
         tr.style.cursor = 'pointer';
         if (route) {
             const overview = `https://wiki.wzbus.net/wiki/${route.area}公交${route.name}`;
