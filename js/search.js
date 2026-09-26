@@ -1,3 +1,9 @@
+﻿const APP_BASE = (() => {
+    if (!/\.github\.io$/i.test(location.hostname)) return '';
+    const seg = location.pathname.split('/').filter(Boolean);
+    return seg.length ? '/' + seg[0] : '';
+})();
+
 // function loadRouteDirections() {
 //     const rows = document.querySelectorAll('.station-table tbody tr');
 
@@ -5,7 +11,7 @@
 //         const routeName = tr.querySelector('td b').textContent.trim();
 //         const directionCell = tr.querySelectorAll('td')[1];
 
-//         const route = busRoutes.find(item => item.name === routeName);
+//         const route = busRoutes.find(item => item.area + '公交' + item.name === routeName);
 
 //         if (route && route.desc) {
 //             const reg = /[:：]\s*([^，,]+)/;
@@ -20,15 +26,15 @@
 // function bindRowClick() {
 //     document.querySelectorAll('.station-table tbody tr').forEach(tr => {
 //         const routeName = tr.querySelector('td b').textContent.trim();
-//         const route = busRoutes.find(item => item.name === routeName);
+//         const route = busRoutes.find(item => item.area + '公交' + item.name === routeName);
 
 //         tr.style.cursor = 'pointer';
 
 //         if (route) {
 //             const overview = `https://wiki.wzbus.net/wiki/${ritem.area}公交${ritem.name}`;
-//             tr.onclick = () => window.location.href = overview;
+//             tr.onclick = () => window.open(overview, '_blank');
 //         } else {
-//             tr.onclick = () => window.location.href = '../404.html';
+//             tr.onclick = () => window.location.href = APP_BASE + '/404.html';
 //         }
 //     });
 // }
@@ -66,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
     rows.forEach(tr => {
         const routeName = tr.querySelector('td b').textContent.trim();
         const directionCell = tr.querySelectorAll('td')[1];
-        const route = busRoutes.find(item => item.name === routeName);
+        const route = busRoutes.find(item => item.area + '公交' + item.name === routeName);
         if (route && route.desc) {
             const reg = /[:：]\s*([^，,]+)/;
             const match = route.desc.match(reg);
@@ -81,9 +87,9 @@ document.addEventListener('DOMContentLoaded', function () {
         tr.style.cursor = 'pointer';
         if (route) {
             const overview = `https://wiki.wzbus.net/wiki/${route.area}公交${route.name}`;
-            tr.onclick = () => window.location.href = overview;
+            tr.onclick = () => window.open(overview, '_blank');
         } else
-            tr.onclick = () => window.location.href = '../404.html';
+            tr.onclick = () => window.location.href = APP_BASE + '/404.html';
     });
 
 });
